@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="PlanApp">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+    <script src="/js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body ng-controller='PlanController as ctrl'>
+    <header>
+      <div id="headerTop">
+        <h3>planit</h3>
+        <nav>
+          <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
+          <a href="#">sign up</a>
+        </nav>
+      </div>
+      <h1>Hi. This is planit.</h1>
+      <h3>
+        {{2+2}}
+      </h3>
+      <a href="views/new.html"><button>add event</button></a>
+    </header>
+    <h2>"Duis aute irure dolor."</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="cardImg"></div>
+        <h5>description</h5>
+      </div>
+    </div>
+    <footer><h4>Ladies of the Byte</h4></footer>
+  </body>
+</html>
