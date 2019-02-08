@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const PlanSchema = new mongoose.Schema({
-    description: String,
-    complete: Boolean
+  description: String,
+  complete: Boolean
 });
 
 const Plans = mongoose.model('Plan', PlanSchema);
