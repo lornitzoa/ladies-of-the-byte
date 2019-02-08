@@ -6,7 +6,7 @@ app.use(express.static('public'))
 app.use(express.json())
 
 const planController = require('./controllers/plan.js');
-app.use('/plan/', planController);
+app.use('/plan', planController);
 
 
 
