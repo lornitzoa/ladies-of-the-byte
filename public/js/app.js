@@ -60,6 +60,6 @@ app.controller("PlanController", [
         controller.events = response.data;
       });
     };
-    this.getTodos();
+    this.getEvent();
   }
 ]); // this closes PlanController
