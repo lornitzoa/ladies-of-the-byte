@@ -4,6 +4,7 @@ app.controller("PlanController", [
   "$http",
   function($http) {
     const controller = this;
+    this.indexOfUpdateFormToShow = null;
     // create event
     this.createEvent = () => {
       $http({
