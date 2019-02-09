@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const Todos = require('./todoModel.js')
+
 const PlanSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -7,7 +9,8 @@ const PlanSchema = new mongoose.Schema({
   },
   date: Date,
   location: String,
-  image: String // we can change this to url later
+  image: String, // we can change this to url later
+  todos: [Todos.schema]
 });
 
 const Plans = mongoose.model('Plan', PlanSchema);

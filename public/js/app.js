@@ -11,7 +11,8 @@ app.controller('PlanController', ['$http', function($http){
         title: this.title,
         date: this.date,
         location: this.location,
-        image: this.image
+        image: this.image,
+        tasks: this.createTaskList()
       }
     }).then(
       (res) => {
@@ -21,6 +22,18 @@ app.controller('PlanController', ['$http', function($http){
         console.log(err);
       }
     )
+  }
+
+  this.createTaskList = () => {
+    $http({
+      method: 'POST',
+      url: '/todo',
+      data: {
+        taskName: this.taskName,
+        dueDate: this.dueDate,
+        notes: this.notes
+      }
+    })
   }
 
   // get event

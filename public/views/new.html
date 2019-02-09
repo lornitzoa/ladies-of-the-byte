@@ -6,13 +6,19 @@
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body ng-controller='PlanController as ctrl'>
-    <form ng-submit='ctrl.createEvent()'>
-      <input type="text" placeholder="Title" ng-model='ctrl.title'>
-      <input type="text" placeholder="Date" ng-model='ctrl.date'>
-      <input type="text" placeholder="Location" ng-model='ctrl.location'>
+  <body ng-controller="PlanController as ctrl">
+    <form ng-submit="ctrl.createEvent()">
+      <input type="text" placeholder="Title" ng-model="ctrl.title">
+      <input type="text" placeholder="Date" ng-model="ctrl.date">
+      <input type="text" placeholder="Location" ng-model="ctrl.location">
       <!-- will change this to accept images later -->
-      <input type="text" placeholder="image" ng-model='ctrl.image'>
+      <input type="text" placeholder="image" ng-model="ctrl.image">
+      <input type="submit" name="" value="Submit">
+    </form>
+    <form ng-submit=ctrl.createTaskList()>
+      <input type="text" placeholder="Task" ng-model="ctrl.taskName">
+      <input type="text" placeholder="Due Date" ng-model="ctrl.dueDate">
+      <input type="text" placeholder="Notes" ng-model="ctrl.notes">
       <input type="submit" name="" value="Submit">
     </form>
   </body>
