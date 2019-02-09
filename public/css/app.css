@@ -1,7 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+
 * {
-  border: 2px solid pink;
+  text-align: center;
+  font-family: "Amatic SC", cursive;
+}
+
+body {
+  margin: 0;
+  background: whitesmoke;
+}
+
+header {
+  color: whitesmoke;
+  height: 350px;
+  background: url("https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
+    no-repeat center center fixed;
+  background-size: cover;
 }
 
 #headerTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+nav,
+h3 {
   display: inline;
+}
+
+nav > a {
+  margin: 5px;
+}
+
+button {
+  margin: 10px;
+}
+
+.eventInfo {
+  margin-top: 15px;
+}
+
+img {
+  margin-bottom: 5px;
+  width: 60px;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.button {
+  margin-top: 8px;
+  font-family: "Amatic SC", cursive;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+footer {
+  margin-top: 80px;
 }

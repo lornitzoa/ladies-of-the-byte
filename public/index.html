@@ -4,31 +4,51 @@
     <meta charset="utf-8" />
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
-    <script src="/js/app.js" charset="utf-8"></script>
+    <script src="js/app.js" charset="utf-8"></script>
     <link rel="stylesheet" href="css/app.css" />
   </head>
-  <body ng-controller='PlanController as ctrl'>
+  <body ng-controller="PlanController as ctrl">
     <header>
       <div id="headerTop">
-        <h3>planit</h3>
-        <nav>
-          <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
-          <a href="#">sign up</a>
-        </nav>
+        <div class="headerCard"><h3>planit</h3></div>
+        <div class="headerCard">
+          <nav>
+            <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
+            <a href="#">sign up</a>
+          </nav>
+        </div>
       </div>
       <h1>Hi. This is planit.</h1>
-      <h3>
-        {{2+2}}
-      </h3>
+      <h3>we're here to sweat the small stuff while you enjoy the ride.</h3>
+      <br />
       <a href="views/new.html"><button>add event</button></a>
     </header>
-    <h2>"Duis aute irure dolor."</h2>
+    <h2>"becoming is better than being."</h2>
     <div class="cards">
-      <div class="card">
-        <div class="cardImg"></div>
-        <h5>description</h5>
+      <div ng-repeat="event in ctrl.events" class="card">
+        <img src="img/003-challenge.png" alt="" /> <br />
+        <div class="eventInfo">
+          <h3>{{event.title}}</h3>
+          <p>{{event.location}}</p>
+          <p>{{event.date}}</p>
+        </div>
+        <button ng-click="ctrl.deleteEvent(event)">delete</button>
+        <button ng-click="ctrl.indexOfUpdateFormToShow = $index">update</button>
+        <form
+          ng-if="$index === ctrl.indexOfUpdateFormToShow"
+          ng-submit="ctrl.updateEvent(event)"
+        >
+          <input type="text" ng-model="ctrl.updatedTitle" placeholder="title" />
+          <input
+            type="text"
+            ng-model="ctrl.updatedLocation"
+            placeholder="location"
+          />
+          <input type="text" ng-model="ctrl.updatedDate" placeholder="date" />
+          <input type="submit" class="button" value="update" />
+        </form>
       </div>
     </div>
-    <footer><h4>Ladies of the Byte</h4></footer>
+    <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
   </body>
 </html>

@@ -28,6 +28,7 @@ app.controller("PlanController", [
       );
     };
 
+
     // update event
     this.updateEvent = function(event) {
       $http({
