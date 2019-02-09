@@ -28,9 +28,9 @@
       <div ng-repeat="event in ctrl.events" class="card">
         <img src="img/003-challenge.png" alt="" /> <br />
         <div class="eventInfo">
-          <h3>{{event.title}}</h3>
-          <p>{{event.location}}</p>
-          <p>{{event.date}}</p>
+          <h3>{{ctrl.title}}</h3>
+          <p>{{ctrl.location}}</p>
+          <p>{{ctrl.date}}</p>
         </div>
         <button ng-click="ctrl.deleteEvent(event)">delete</button>
         <button ng-click="ctrl.indexOfUpdateFormToShow = $index">update</button>

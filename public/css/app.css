@@ -64,6 +64,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: gray;
+}
+
 .button {
   margin-top: 8px;
   font-family: "Amatic SC", cursive;
