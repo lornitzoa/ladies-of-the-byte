@@ -1,35 +1,65 @@
-const app = angular.module('PlanApp', [])
+const app = angular.module("PlanApp", []);
 
-app.controller('PlanController', ['$http', function($http){
+app.controller("PlanController", [
+  "$http",
+  function($http) {
+    const controller = this;
+    this.indexOfUpdateFormToShow = null;
+    // create event
+    this.createEvent = () => {
+      $http({
+        method: "POST",
+        url: "/plan",
+        data: {
+          title: this.title,
+          date: this.date,
+          location: this.location,
+          image: this.image
+        }
+      }).then(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    };
 
-  // create event
-  this.createEvent = () => {
-    $http({
-      method: 'POST',
-      url: '/plan',
-      data: {
-        title: this.title,
-        date: this.date,
-        location: this.location,
-        image: this.image
-      }
-    }).then(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
+    // update event
+    this.updateEvent = function(event) {
+      $http({
+        method: "PUT",
+        url: "/plan/",
+        data: {
+          title: this.updatedTitle,
+          date: this.updatedDate,
+          location: this.updatedLocation,
+          image: this.updatedImage
+        }
+      });
+    };
+    // delete event
+    this.deleteEvent = function(event) {
+      $http({
+        method: "DELETE",
+        url: "/plan/" + event._id
+      }).then(
+        function(response) {
+          controller.getEvent();
+        },
+        function() {}
+      );
+    };
+    // get event
+    this.getEvent = function() {
+      $http({
+        method: "GET",
+        url: "/plan"
+      }).then(function(response) {
+        controller.events = response.data;
+      });
+    };
+    this.getTodos();
   }
-
-  // get event
-
-
-  // update event
-
-
-  // delete event
-
-
-}]) // this closes PlanController
+]); // this closes PlanController
