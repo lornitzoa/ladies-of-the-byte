@@ -6,6 +6,7 @@
       charset="utf-8"
     ></script>
     <script src="/js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/css/app.css">
     <meta charset="utf-8" />
     <title></title>
   </head>
@@ -24,16 +25,17 @@
       <h2>{{ctrl.plan.date | date: MM/dd/yyyy}}</h2>
       <h3>{{ctrl.plan.location}}</h3>
       <!-- <img src="{{ctrl.plan.image}}" alt=""> -->
-
+      <form ng-submit=ctrl.createTodo() ng-if='ctrl.showPlanOpts === true'>
+        <h2>Task List</h2>
+        <input type="text" placeholder="Task" ng-model="ctrl.taskName">
+        <input type="text" placeholder="Due Date" ng-model="ctrl.dueDate">
+        <input type="text" placeholder="Notes" ng-model="ctrl.notes">
+        <input type="submit" name="" value="Add Task">
+      </form>
       <ul ng-repeat="item in ctrl.todoList">
         <li>{{item.taskName}}</li>
       </ul>
     </div>
-    <form ng-submit=ctrl.createTodo() ng-if='ctrl.showPlanOpts === true'>
-      <input type="text" placeholder="Task" ng-model="ctrl.taskName">
-      <input type="text" placeholder="Due Date" ng-model="ctrl.dueDate">
-      <input type="text" placeholder="Notes" ng-model="ctrl.notes">
-      <input type="submit" name="" value="Submit">
-    </form>
+
   </body>
 </html>
