@@ -5,6 +5,8 @@ app.controller("PlanController", [
   function($http) {
     const controller = this;
     this.indexOfUpdateFormToShow = null;
+
+
     // create event
     this.createEvent = () => {
       $http({
@@ -25,6 +27,7 @@ app.controller("PlanController", [
         }
       );
     };
+
 
     // update event
     this.updateEvent = function(event) {
@@ -60,6 +63,6 @@ app.controller("PlanController", [
         controller.events = response.data;
       });
     };
-    this.getTodos();
+    // this.getTodos();
   }
 ]); // this closes PlanController
