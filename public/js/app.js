@@ -6,6 +6,7 @@ app.controller("PlanController", [
     const controller = this;
     this.indexOfUpdateFormToShow = null;
 
+    this.showPlanOpts = false
 
     // create event
     this.createEvent = () => {
@@ -19,17 +20,26 @@ app.controller("PlanController", [
           image: this.image
         }
       }).then(
-        res => {
-          console.log(res);
+        (res) => {
+          this.plan = res.data
+          console.log(this.plan);
         },
-        err => {
+        (err) => {
           console.log(err);
         }
       );
     };
 
     this.createTodo = () => {
-
+      $http({
+        method: "POST",
+        url: '/todo',
+        data: {
+          taskName: this.taskName,
+          dueDate: this.dueDate,
+          notes: this.notes
+        }
+      }).then()
     }
 
 
