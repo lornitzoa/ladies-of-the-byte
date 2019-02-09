@@ -6,6 +6,9 @@ app.controller("PlanController", [
     const controller = this;
     this.indexOfUpdateFormToShow = null;
 
+    this.showPlanOpts = false
+    this.planID = ''
+    this.todoList = []
 
     // create event
     this.createEvent = () => {
@@ -19,25 +22,62 @@ app.controller("PlanController", [
           image: this.image
         }
       }).then(
-        res => {
-          console.log(res);
+        (res) => {
+          this.plan = res.data
+          this.planID = res.data._id
         },
-        err => {
+        (err) => {
           console.log(err);
         }
       );
     };
 
     this.createTodo = () => {
+      $http({
+        method: "POST",
+        url: `/todo`,
+        data: {
+          taskName: this.taskName,
+          dueDate: this.dueDate,
+          notes: this.notes
+        }
+      }).then(
+        (res) => {
+          this.todoItem = res.data
+          this.addEventTodos(this.planID)
+          this.todoList.push(res.data)
+          console.log(this.todoList);
 
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
     }
 
+    // add todo list items via update
+    this.addEventTodos = (eventID) => {
+      $http({
+        method: 'PUT',
+        url: '/plan/' + eventID,
+        data: {
+          todos: this.todoItem
+        }
+      }).then(
+        (res) => {
+          // console.log(res.data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
 
     // update event
     this.updateEvent = function(event) {
       $http({
         method: "PUT",
-        url: "/plan/",
+        url: "/plan/" + event._id,
         data: {
           title: this.updatedTitle,
           date: this.updatedDate,

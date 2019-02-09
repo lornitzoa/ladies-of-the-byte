@@ -6,9 +6,6 @@ const session = require('express-session');
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use(express.static('public'));
-app.use(express.json());
-
 const planController = require('./controllers/plan.js');
 app.use('/plan', planController);
 
