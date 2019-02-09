@@ -28,6 +28,10 @@ app.controller("PlanController", [
       );
     };
 
+    this.createTodo = () => {
+
+    }
+
 
     // update event
     this.updateEvent = function(event) {
