@@ -55,11 +55,7 @@ app.controller("PlanController", [
           this.taskName = ''
           this.dueDate = ''
           this.notes = ''
-
-
-
           // console.log(this.todoList);
-
         },
         (err) => {
           console.log(err);

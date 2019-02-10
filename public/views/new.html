@@ -30,7 +30,7 @@
         <input type="text" placeholder="Task" ng-model="ctrl.taskName" ng-class='todoItem'>
         <input type="text" placeholder="Due Date" ng-model="ctrl.dueDate" ng-class='todoItem'>
         <input type="text" placeholder="Notes" ng-model="ctrl.notes" ng-class='todoItem'>
-        <input type="submit" name="" value="Add Task" ng-form=reset()>
+        <input type="submit" name="" value="Add Task">
         <!-- write code to clear form after submit -->
       </form>
       <ul ng-repeat="item in ctrl.todoList | orderBy: '-dueDate' : true">
