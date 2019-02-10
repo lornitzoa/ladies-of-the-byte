@@ -1,35 +1,114 @@
-const app = angular.module('PlanApp', [])
+const app = angular.module("PlanApp", []);
 
-app.controller('PlanController', ['$http', function($http){
+app.controller("PlanController", [
+  "$http",
+  function($http) {
+    const controller = this;
+    this.indexOfUpdateFormToShow = null;
 
-  // create event
-  this.createEvent = () => {
-    $http({
-      method: 'POST',
-      url: '/plan',
-      data: {
-        title: this.title,
-        date: this.date,
-        location: this.location,
-        image: this.image
-      }
-    }).then(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    )
+    this.showPlanOpts = false
+    this.planID = ''
+    this.todoList = []
+
+    // create event
+    this.createEvent = () => {
+      $http({
+        method: "POST",
+        url: "/plan",
+        data: {
+          title: this.title,
+          date: this.date,
+          location: this.location,
+          image: this.image
+        }
+      }).then(
+        (res) => {
+          this.plan = res.data
+          this.planID = res.data._id
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    };
+
+    this.createTodo = () => {
+      $http({
+        method: "POST",
+        url: `/todo`,
+        data: {
+          taskName: this.taskName,
+          dueDate: this.dueDate,
+          notes: this.notes
+        }
+      }).then(
+        (res) => {
+          this.todoItem = res.data
+          this.addEventTodos(this.planID)
+          this.todoList.push(res.data)
+          console.log(this.todoList);
+
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
+
+    // add todo list items via update
+    this.addEventTodos = (eventID) => {
+      $http({
+        method: 'PUT',
+        url: '/plan/' + eventID,
+        data: {
+          todos: this.todoItem
+        }
+      }).then(
+        (res) => {
+          // console.log(res.data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
+
+    // update event
+    this.updateEvent = function(event) {
+      $http({
+        method: "PUT",
+        url: "/plan/" + event._id,
+        data: {
+          title: this.updatedTitle,
+          date: this.updatedDate,
+          location: this.updatedLocation,
+          image: this.updatedImage
+        }
+      });
+    };
+    // delete event
+    this.deleteEvent = function(event) {
+      $http({
+        method: "DELETE",
+        url: "/plan/" + event._id
+      }).then(
+        function(response) {
+          controller.getEvent();
+        },
+        function() {}
+      );
+    };
+    // get event
+    this.getEvent = function() {
+      $http({
+        method: "GET",
+        url: "/plan"
+      }).then(function(response) {
+        controller.events = response.data;
+      });
+    };
+    this.getEvent();
+
+    // this.getTodos();
   }
-
-  // get event
-
-
-  // update event
-
-
-  // delete event
-
-
-}]) // this closes PlanController
+]); // this closes PlanController
