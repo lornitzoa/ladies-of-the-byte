@@ -25,8 +25,8 @@
       <h2>{{ctrl.plan.date | date: MM/dd/yyyy}}</h2>
       <h3>{{ctrl.plan.location}}</h3>
       <!-- <img src="{{ctrl.plan.image}}" alt=""> -->
-      <h2>Task List</h2>
       <form  ng-submit="ctrl.createTodo()" ng-if='ctrl.showPlanOpts === true' >
+        <h2>Task List</h2>
         <input type="text" placeholder="Task" ng-model="ctrl.taskName" ng-class='todoItem'>
         <input type="text" placeholder="Due Date" ng-model="ctrl.dueDate" ng-class='todoItem'>
         <input type="text" placeholder="Notes" ng-model="ctrl.notes" ng-class='todoItem'>
@@ -35,6 +35,7 @@
       </form>
       <ul ng-repeat="item in ctrl.todoList | orderBy: '-dueDate' : true">
         <li>{{item.taskName }} {{ item.dueDate | date: MM/dd/yyyy }} {{ item.notes }}</li>
+
       </ul>
     </div>
 
