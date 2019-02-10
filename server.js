@@ -12,7 +12,13 @@ app.use(session({
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get('/login', (req, res) => {
+// save user info
+// app.get('/login', (req, res) => {
+//   res.json()
+// });
+
+// retrieve user info saved on the session object
+app.get('/', (req, res) => {
   if (req.session.currentUser) {
     res.json(req.session.currentUser);
   } else {
@@ -21,7 +27,13 @@ app.get('/login', (req, res) => {
       message: 'not logged in'
     });
   }
-})
+});
+
+const userController = require('./controllers/users.js')
+app.use('/users', userController);
+
+const sessionsController = require('./controllers/sessions.js');
+app.use('/sessions', sessionsController);
 
 const planController = require('./controllers/plan.js');
 app.use('/plan', planController);
@@ -29,7 +41,7 @@ app.use('/plan', planController);
 const todoController = require('./controllers/todos.js');
 app.use('/todo', todoController);
 
-app.listen(3000, ()=>{
+app.listen(3000, () => {
   console.log('listening...');
 });
 

@@ -1,8 +1,6 @@
-const app = angular.module("PlanApp", []);
+const app = angular.module('PlanApp', [])
 
-app.controller("PlanController", [
-  "$http",
-  function($http) {
+app.controller('PlanController', ['$http', function ($http) {
     const controller = this;
     this.indexOfUpdateFormToShow = null;
 
@@ -71,7 +69,7 @@ app.controller("PlanController", [
           console.log(err);
         }
       )
-    }
+    },
 
     // update event
     this.updateEvent = function(event) {
@@ -110,5 +108,35 @@ app.controller("PlanController", [
     this.getEvent();
 
     // this.getTodos();
+
+  // create user
+  this.createUser = function() {
+    $http({
+      method: 'POST',
+      url: '/users',
+      data: {
+        username: this.username,
+        password: this.password
+      }
+    }).then(function(response) {
+      console.log(response);
+    }, function() {
+      console.log('error');
+    });
   }
-]); // this closes PlanController
+  // user log in
+  this.logIn = function() {
+    $http({
+      method: 'POST',
+      url: '/sessions',
+      data: {
+        username: this.username,
+        password: this.password
+      }
+    }).then(function(response) {
+      console.log(response);
+    }, function() {
+      console.log('error');
+    });
+  }
+}]); // this closes PlanController
