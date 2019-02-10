@@ -4,12 +4,13 @@ app.controller("PlanController", [
   "$http",
   function($http) {
     const controller = this;
-    this.indexOfUpdateFormToShow = null
-    this.showNewForm = true
-    this.showPlanOpts = false
-    // save planID as a global variable to make it accessible to createTodo functions
-    this.planID = ''
-    this.todoList = []
+
+    this.showAddEventForm = false;
+    this.showAddTask = false;
+    this.showUpdateForm = false;
+    this.planID = "";
+    this.todoList = [];
+
 
     // create event
     this.createEvent = () => {
@@ -30,9 +31,9 @@ app.controller("PlanController", [
           this.date = ''
           this.location = ''
           this.image = ''
-          this.showNewForm = false
+          controller.events.push(res.data);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
       );
@@ -41,7 +42,7 @@ app.controller("PlanController", [
     this.createTodo = () => {
       $http({
         method: "POST",
-        url: `/todo`,
+        url: "/todo",
         data: {
           taskName: this.taskName,
           dueDate: this.dueDate,
@@ -58,29 +59,29 @@ app.controller("PlanController", [
           this.notes = ''
           // console.log(this.todoList);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-      )
-    }
+      );
+    };
 
     // add todo list items via update
-    this.addEventTodos = (eventID) => {
+    this.addEventTodos = eventID => {
       $http({
-        method: 'PUT',
-        url: '/plan/' + eventID,
+        method: "PUT",
+        url: "/plan/" + eventID,
         data: {
           todos: this.todoItem
         }
       }).then(
-        (res) => {
+        res => {
           // console.log(res.data);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-      )
-    }
+      );
+    };
 
 
 
