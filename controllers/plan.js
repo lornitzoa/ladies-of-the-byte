@@ -16,6 +16,8 @@ router.delete("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   Plans.create(req.body, (err, createdPlan) => {
+    console.log("err", err);
+
     res.json(createdPlan);
   });
 });
