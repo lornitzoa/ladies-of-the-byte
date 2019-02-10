@@ -7,6 +7,7 @@ app.controller("PlanController", [
     this.indexOfUpdateFormToShow = null
     this.showNewForm = true
     this.showPlanOpts = false
+    // save planID as a global variable to make it accessible to createTodo functions
     this.planID = ''
     this.todoList = []
 
