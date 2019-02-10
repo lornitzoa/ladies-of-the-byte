@@ -139,4 +139,14 @@ app.controller('PlanController', ['$http', function ($http) {
       console.log('error');
     });
   }
+  this.goApp = function() {
+    $http({
+      method:'GET',
+      url: '/plan'
+    }).then(function (response) {
+        controller.loggedInUsername = response.data.username;
+      }, function () {
+        console.log('error');
+      });
+  }
 }]); // this closes PlanController

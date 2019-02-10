@@ -30,4 +30,13 @@ router.post('/', (req, res) => {
   })
 })
 
+// delete session
+router.delete('/', function(req, res) {
+  req.session.destroy(function() {
+    res.status(200).json( {
+      status:200,
+      message: 'logout complete'
+    });
+  });
+})
 module.exports = router;

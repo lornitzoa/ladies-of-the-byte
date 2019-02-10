@@ -12,11 +12,6 @@ app.use(session({
 app.use(express.json());
 app.use(express.static("public"));
 
-// save user info
-// app.get('/login', (req, res) => {
-//   res.json()
-// });
-
 // retrieve user info saved on the session object
 app.get('/', (req, res) => {
   if (req.session.currentUser) {
