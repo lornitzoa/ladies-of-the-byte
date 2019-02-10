@@ -11,7 +11,6 @@ app.controller("PlanController", [
     this.planID = "";
     this.todoList = [];
 
-
     // create event
     this.createEvent = () => {
       $http({
@@ -24,13 +23,13 @@ app.controller("PlanController", [
           image: this.image
         }
       }).then(
-        (res) => {
-          this.plan = res.data
-          this.planID = res.data._id
-          this.title = ''
-          this.date = ''
-          this.location = ''
-          this.image = ''
+        res => {
+          this.plan = res.data;
+          this.planID = res.data._id;
+          this.title = "";
+          this.date = "";
+          this.location = "";
+          this.image = "";
           controller.events.push(res.data);
         },
         err => {
@@ -49,14 +48,14 @@ app.controller("PlanController", [
           notes: this.notes
         }
       }).then(
-        (res) => {
-          this.todoItem = res.data
-          this.addEventTodos(this.planID)
-          this.todoList.push(res.data)
+        res => {
+          this.todoItem = res.data;
+          this.addEventTodos(this.planID);
+          this.todoList.push(res.data);
           // clear form inputs, this is a total hack way of doing this but its the only way I found that actually worked for me
-          this.taskName = ''
-          this.dueDate = ''
-          this.notes = ''
+          this.taskName = "";
+          this.dueDate = "";
+          this.notes = "";
           // console.log(this.todoList);
         },
         err => {
@@ -82,8 +81,6 @@ app.controller("PlanController", [
         }
       );
     };
-
-
 
     // update event
     this.updateEvent = function(event) {
