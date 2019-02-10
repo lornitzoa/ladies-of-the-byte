@@ -2,12 +2,12 @@ const app = angular.module('PlanApp', [])
 
 app.controller('PlanController', ['$http', function ($http) {
     const controller = this;
-    this.indexOfUpdateFormToShow = null
-    this.showNewForm = true
-    this.showPlanOpts = false
-    // save planID as a global variable to make it accessible to createTodo functions
-    this.planID = ''
-    this.todoList = []
+
+    this.showAddEventForm = false;
+    this.showAddTask = false;
+    this.showUpdateForm = false;
+    this.planID = "";
+    this.todoList = [];
 
     // create event
     this.createEvent = () => {
@@ -21,16 +21,16 @@ app.controller('PlanController', ['$http', function ($http) {
           image: this.image
         }
       }).then(
-        (res) => {
-          this.plan = res.data
-          this.planID = res.data._id
-          this.title = ''
-          this.date = ''
-          this.location = ''
-          this.image = ''
-          this.showNewForm = false
+        res => {
+          this.plan = res.data;
+          this.planID = res.data._id;
+          this.title = "";
+          this.date = "";
+          this.location = "";
+          this.image = "";
+          controller.events.push(res.data);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
       );
@@ -39,48 +39,46 @@ app.controller('PlanController', ['$http', function ($http) {
     this.createTodo = () => {
       $http({
         method: "POST",
-        url: `/todo`,
+        url: "/todo",
         data: {
           taskName: this.taskName,
           dueDate: this.dueDate,
           notes: this.notes
         }
       }).then(
-        (res) => {
-          this.todoItem = res.data
-          this.addEventTodos(this.planID)
-          this.todoList.push(res.data)
+        res => {
+          this.todoItem = res.data;
+          this.addEventTodos(this.planID);
+          this.todoList.push(res.data);
           // clear form inputs, this is a total hack way of doing this but its the only way I found that actually worked for me
-          this.taskName = ''
-          this.dueDate = ''
-          this.notes = ''
+          this.taskName = "";
+          this.dueDate = "";
+          this.notes = "";
           // console.log(this.todoList);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-      )
-    }
+      );
+    };
 
     // add todo list items via update
-    this.addEventTodos = (eventID) => {
+    this.addEventTodos = eventID => {
       $http({
-        method: 'PUT',
-        url: '/plan/' + eventID,
+        method: "PUT",
+        url: "/plan/" + eventID,
         data: {
           todos: this.todoItem
         }
       }).then(
-        (res) => {
+        res => {
           // console.log(res.data);
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-      )
-    },
-
-
+      );
+    };
 
     // update event
     this.updateEvent = function(event) {
