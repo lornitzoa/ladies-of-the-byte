@@ -30,6 +30,7 @@ app.controller("PlanController", [
           this.date = ''
           this.location = ''
           this.image = ''
+          controller.events.push(res.data);
         },
         err => {
           console.log(err);
