@@ -24,12 +24,36 @@ header {
   padding: 5px;
 }
 
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .card {
   width: 250px;
   border: 1px solid gray;
   border-radius: 5px;
   margin: 10px;
-  padding: 20px;
+  padding: 10px;
+}
+
+.eventInfo {
+  margin-top: 7px;
+}
+
+img {
+  width: 60px;
+}
+
+.eventInfo > h3 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.eventInfo > p {
+  margin: 4px;
+  font-size: 20px;
 }
 
 h5 {
@@ -48,15 +72,7 @@ nav > a {
 
 button {
   margin: 10px;
-}
-
-.eventInfo {
-  margin-top: 15px;
-}
-
-img {
-  margin-bottom: 5px;
-  width: 60px;
+  font-size: 15px;
 }
 
 a {
@@ -65,11 +81,10 @@ a {
 }
 
 a:hover {
-  color: gray;
+  color: lightgray;
 }
 
 .button {
-  margin-top: 8px;
   font-family: "Amatic SC", cursive;
   border: 1px solid lightgray;
   border-radius: 5px;
