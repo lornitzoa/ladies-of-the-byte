@@ -3,13 +3,45 @@ const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+app.use(session({
+	secret: "feedmeseymour",
+	resave: false,
+	saveUninitialized: false
+}));
+
 app.use(express.json());
 app.use(express.static("public"));
 
-const planController = require('./controllers/plan.js');
-app.use('/plan/', planController);
+// save user info
+// app.get('/login', (req, res) => {
+//   res.json()
+// });
 
-app.listen(3000, ()=>{
+// retrieve user info saved on the session object
+app.get('/', (req, res) => {
+  if (req.session.currentUser) {
+    res.json(req.session.currentUser);
+  } else {
+    res.status(401).json({
+      status: 401,
+      message: 'not logged in'
+    });
+  }
+});
+
+const userController = require('./controllers/users.js')
+app.use('/users', userController);
+
+const sessionsController = require('./controllers/sessions.js');
+app.use('/sessions', sessionsController);
+
+const planController = require('./controllers/plan.js');
+app.use('/plan', planController);
+
+const todoController = require('./controllers/todos.js');
+app.use('/todo', todoController);
+
+app.listen(3000, () => {
   console.log('listening...');
 });
 
