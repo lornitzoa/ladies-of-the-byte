@@ -2,14 +2,12 @@
 <html lang="en" dir="ltr" ng-app="PlanApp">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Planit Members</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
   </head>
   <body ng-controller="PlanController as ctrl">
     <h2>Planit Newbie</h2>
-      <!-- <button type="button" "ctrl.indexOfCreateLogInShow()">Create Account</button>
-        <form ng-if="$index === ctrl.indexOfCreateLogInShow" ng-submit="ctrl.createUser()"> -->
         <button ng-click="ctrl.showCreateUser = !ctrl.showCreateUser">Create Account</button>
           <form ng-submit="ctrl.createUser()" ng-if="ctrl.showCreateUser">
           <input type="text" ng-model="ctrl.username" placeholder="username"/>
