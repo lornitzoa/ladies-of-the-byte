@@ -2,7 +2,6 @@ const app = angular.module('PlanApp', [])
 
 app.controller('PlanController', ['$http', function ($http) {
     const controller = this;
-
     this.showAddEventForm = false;
     this.showAddTask = false;
     this.showUpdateForm = false;
@@ -21,13 +20,14 @@ app.controller('PlanController', ['$http', function ($http) {
           image: this.image
         }
       }).then(
-        res => {
-          this.plan = res.data;
-          this.planID = res.data._id;
-          this.title = "";
-          this.date = "";
-          this.location = "";
-          this.image = "";
+        (res) => {
+          this.plan = res.data
+          this.planID = res.data._id
+          controller.events.push(res.data);
+          this.title = ''
+          this.date = ''
+          this.location = ''
+          this.image = ''
           controller.events.push(res.data);
         },
         err => {
