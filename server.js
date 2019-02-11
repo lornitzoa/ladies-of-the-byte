@@ -3,6 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+const port = process.env.PORT || 3000;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'planit'
+
 app.use(session({
 	secret: "feedmeseymour",
 	resave: false,
