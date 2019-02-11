@@ -150,11 +150,10 @@ app.controller('PlanController', ['$http', function ($http) {
       console.log('error');
     });
   }
-  this.goApp = function () {
-    const controller = this
+  this.goApp = function() {
     $http({
       method: 'GET',
-      url: '/plan'
+      url: '/'
     }).then(function (response) {
       controller.loggedInUsername = response.data.username;
     }, function () {
