@@ -4,7 +4,7 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 
 // session end route
-router.delete('/views/logout.html', (req, res) => {
+router.delete('/', (req, res) => {
   req.session.destroy(() => {
     res.status(200).json({
       status: 200,
@@ -30,13 +30,4 @@ router.post('/', (req, res) => {
   })
 })
 
-// delete session
-// router.delete('/', function(req, res) {
-//   req.session.destroy(function() {
-//     res.status(200).json( {
-//       status:200,
-//       message: 'logout complete'
-//     });
-//   });
-// })
 module.exports = router;
