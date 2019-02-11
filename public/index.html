@@ -14,39 +14,64 @@
         <div class="headerCard">
           <nav>
             <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
-            <a href="#">sign up</a>
+            <a href="/views/auth.html">sign up</a>
           </nav>
         </div>
       </div>
-      <h1>Hi. This is planit.</h1>
+      <h1 ng-if="ctrl.loggedInUsername">Hi, {{auth.loggedInUsername}}! This is planit.</h1>
       <h3>we're here to sweat the small stuff while you enjoy the ride.</h3>
       <br />
-      <a href="/views/auth.html"> <button">Log In/Sign In</button></a>
-      <a href="views/new.html"><button>add event</button></a>
+
+      <button ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
+        add event
+      </button>
+      <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()">
+        <input type="text" placeholder="Title" ng-model="ctrl.title" />
+        <input type="text" placeholder="mm/dd/yy" ng-model="ctrl.date" />
+        <input type="text" placeholder="Location" ng-model="ctrl.location" />
+        <input type="submit" class="button" value="plan it" />
+      </form>
     </header>
     <h2>"becoming is better than being."</h2>
     <div class="cards">
       <div ng-repeat="event in ctrl.events" class="card">
         <img src="img/003-challenge.png" alt="" /> <br />
         <div class="eventInfo">
-          <h3>{{ctrl.title}}</h3>
-          <p>{{ctrl.location}}</p>
-          <p>{{ctrl.date}}</p>
+          <h3>{{event.title}}</h3>
+          <p>{{event.location}}</p>
+          <p>{{event.date}}</p>
         </div>
+        <button ng-click="event.showAddTask = !event.showAddTask">
+          add task
+        </button>
+
+        <button ng-click="event.showUpdateForm = !event.showUpdateForm">
+          update
+        </button>
         <button ng-click="ctrl.deleteEvent(event)">delete</button>
-        <button ng-click="ctrl.indexOfUpdateFormToShow = $index">update</button>
-        <form
-          ng-if="$index === ctrl.indexOfUpdateFormToShow"
-          ng-submit="ctrl.updateEvent(event)"
-        >
+        <form ng-submit="ctrl.createTodo()" ng-if="ctrl.showAddTask">
+          <input type="text" placeholder="Task" ng-model="ctrl.taskName" />
+          <input
+            type="text"
+            placeholder="Due mm/dd/yy"
+            ng-model="ctrl.dueDate"
+          />
+          <input type="text" placeholder="Notes" ng-model="ctrl.notes" />
+          <input type="submit" class="button" value="submit" />
+        </form>
+        <form ng-if="ctrl.showUpdateForm" ng-submit="ctrl.updateEvent(event)">
           <input type="text" ng-model="ctrl.updatedTitle" placeholder="title" />
           <input
             type="text"
             ng-model="ctrl.updatedLocation"
             placeholder="location"
           />
-          <input type="text" ng-model="ctrl.updatedDate" placeholder="date" />
-          <input type="submit" class="button" value="update" />
+          <input
+            type="text"
+            ng-model="ctrl.updatedDate"
+            placeholder="mm/dd/yy"
+          />
+          <input type="submit" class="button" value="submit" />
         </form>
       </div>
     </div>

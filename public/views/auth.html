@@ -7,19 +7,22 @@
     <script src="/js/app.js" charset="utf-8"></script>
   </head>
   <body ng-controller="PlanController as ctrl">
-    <h2>Create User</h2>
-      <form ng-submit="ctrl.createUser()">
-        <input type="text" ng-model="ctrl.username" />
-        <input type="password" ng-model="ctrl.password" />
-        <input type="submit" value="Create User">
-      </form>
-      <h2>Log In</h2>
-      <form ng-submit="ctrl.logIn()">
-      <input type="text" ng-model="ctrl.username" />
-      <input type="password" ng-model="ctrl.password" />
+    <h2>Planit Newbie</h2>
+      <!-- <button type="button" "ctrl.indexOfCreateLogInShow()">Create Account</button>
+        <form ng-if="$index === ctrl.indexOfCreateLogInShow" ng-submit="ctrl.createUser()"> -->
+        <button ng-click="ctrl.showCreateUser = !ctrl.showCreateUser">Create Account</button>
+          <form ng-submit="ctrl.createUser()" ng-if="ctrl.showCreateUser">
+          <input type="text" ng-model="ctrl.username" placeholder="username"/>
+          <input type="password" ng-model="ctrl.password" placeholder="password" />
+          <input type="submit" value="Create User">
+        </form>
+      <h2>Planit Guru</h2>
+      <button ng-click="ctrl.showLogInUser = !ctrl.showLogInUser">Log In</button>
+      <form ng-submit="ctrl.logIn()" ng-if="ctrl.showLogInUser">
+      <input type="text" ng-model="ctrl.username" placeholder="username" />
+      <input type="password" ng-model="ctrl.password" placeholder="password" />
       <input type="submit" value="Log In">
     </form>
-      <h2>Start Planning</h2>
-      <a href="#" ng-click="ctrl.goApp()">Click here</a>
+      <a href="#" ng-click="ctrl.goApp()">Planit</a>
   </body>
 </html>
