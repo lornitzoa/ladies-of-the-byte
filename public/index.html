@@ -40,15 +40,24 @@
           <p>{{event.location}}</p>
           <p>{{event.date}}</p>
         </div>
-        <button ng-click="event.showAddTask = !event.showAddTask">
+        <button ng-click="ctrl.showAddTask = !ctrl.showAddTask">
           add task
         </button>
 
-        <button ng-click="event.showUpdateForm = !event.showUpdateForm">
+        <button
+          ng-click="ctrl.showUpdateForm = !ctrl.showUpdateForm; ctrl.indexOfFormToShow = $index"
+        >
           update
         </button>
-        <button ng-click="ctrl.deleteEvent(event)">delete</button>
-        <form ng-submit="ctrl.createTodo()" ng-if="ctrl.showAddTask">
+        <button
+          ng-click="ctrl.deleteEvent(event); ctrl.indexOfFormToShow = $index"
+        >
+          delete
+        </button>
+        <form
+          ng-submit="ctrl.createTodo()"
+          ng-if="ctrl.showAddTask && ($index === ctrl.indexOfFormToShow)"
+        >
           <input type="text" placeholder="Task" ng-model="ctrl.taskName" />
           <input
             type="text"
@@ -58,7 +67,10 @@
           <input type="text" placeholder="Notes" ng-model="ctrl.notes" />
           <input type="submit" class="button" value="submit" />
         </form>
-        <form ng-if="ctrl.showUpdateForm" ng-submit="ctrl.updateEvent(event)">
+        <form
+          ng-if="ctrl.showUpdateForm && ($index === ctrl.indexOfFormToShow)"
+          ng-submit="ctrl.updateEvent(event)"
+        >
           <input type="text" ng-model="ctrl.updatedTitle" placeholder="title" />
           <input
             type="text"

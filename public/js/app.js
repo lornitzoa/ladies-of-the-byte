@@ -1,6 +1,8 @@
-const app = angular.module('PlanApp', [])
+const app = angular.module("PlanApp", []);
 
-app.controller('PlanController', ['$http', function ($http) {
+app.controller("PlanController", [
+  "$http",
+  function($http) {
     const controller = this;
 
     this.showAddEventForm = false;
@@ -8,7 +10,7 @@ app.controller('PlanController', ['$http', function ($http) {
     this.showUpdateForm = false;
     this.planID = "";
     this.todoList = [];
-
+    this.indexOfFormToShow = null;
     // create event
     this.createEvent = () => {
       $http({
@@ -118,34 +120,41 @@ app.controller('PlanController', ['$http', function ($http) {
 
     // this.getTodos();
 
-  // create user
-  this.createUser = function() {
-    $http({
-      method: 'POST',
-      url: '/users',
-      data: {
-        username: this.username,
-        password: this.password
-      }
-    }).then(function(response) {
-      console.log(response);
-    }, function() {
-      console.log('error');
-    });
+    // create user
+    this.createUser = function() {
+      $http({
+        method: "POST",
+        url: "/users",
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      }).then(
+        function(response) {
+          console.log(response);
+        },
+        function() {
+          console.log("error");
+        }
+      );
+    };
+    // user log in
+    this.logIn = function() {
+      $http({
+        method: "POST",
+        url: "/sessions",
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      }).then(
+        function(response) {
+          console.log(response);
+        },
+        function() {
+          console.log("error");
+        }
+      );
+    };
   }
-  // user log in
-  this.logIn = function() {
-    $http({
-      method: 'POST',
-      url: '/sessions',
-      data: {
-        username: this.username,
-        password: this.password
-      }
-    }).then(function(response) {
-      console.log(response);
-    }, function() {
-      console.log('error');
-    });
-  }
-}]); // this closes PlanController
+]); // this closes PlanController
