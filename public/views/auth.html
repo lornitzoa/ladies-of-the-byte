@@ -24,17 +24,15 @@
         <h2>planit guru</h2>
         <button ng-click="ctrl.showLogInUser = !ctrl.showLogInUser">Log In</button>
         <form ng-submit="ctrl.logIn()" ng-if="ctrl.showLogInUser">
-        <input type="text" ng-model="ctrl.username" placeholder="username" />
-        <input type="password" ng-model="ctrl.password" placeholder="password" />
+        <input type="text" ng-model="ctrl.usernameLogIn" placeholder="username" />
+        <input type="password" ng-model="ctrl.passwordLogIn" placeholder="password" />
         <input type="submit" value="Enter">
       </form>
       </div>
       <br>
-        <button
-        ng-if="ctrl.loggedInUsername"
-        href="../index.html"
-        >Planit
-        </button>
+        <div ng-if="ctrl.loggedInUsername">
+         <a href="../index.html">planit</a>
+        </div>
     </div>
   </body>
 </html>

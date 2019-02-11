@@ -141,11 +141,12 @@ app.controller('PlanController', ['$http', function ($http) {
       method: 'POST',
       url: '/sessions',
       data: {
-        username: this.username,
-        password: this.password
+        username: this.usernameLogIn,
+        password: this.passwordLogIn
       }
     }).then(function(response) {
       console.log(response);
+      controller.goApp();
     }, function() {
       console.log('error');
     });
@@ -153,11 +154,13 @@ app.controller('PlanController', ['$http', function ($http) {
   this.goApp = function() {
     $http({
       method: 'GET',
-      url: '/'
+      url: '/users'
     }).then(function (response) {
       controller.loggedInUsername = response.data.username;
+      console.log(response.data);
     }, function () {
       console.log('error');
     });
   }
+  this.goApp()
 }]); // this closes PlanController
