@@ -9,6 +9,7 @@ const PlanSchema = new mongoose.Schema({
   },
   date: Date,
   location: String,
+  // image: String // we can change this to url later
   image: String, // we can change this to url later
   todos: {type: Array}
 });

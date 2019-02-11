@@ -1,8 +1,6 @@
-const app = angular.module("PlanApp", []);
+const app = angular.module('PlanApp', [])
 
-app.controller("PlanController", [
-  "$http",
-  function($http) {
+app.controller('PlanController', ['$http', function ($http) {
     const controller = this;
     this.showAddEventForm = false;
     this.showAddTask = false;
@@ -48,14 +46,14 @@ app.controller("PlanController", [
           notes: this.notes
         }
       }).then(
-        (res) => {
-          this.todoItem = res.data
-          this.addEventTodos(this.planID)
-          this.todoList.push(res.data)
+        res => {
+          this.todoItem = res.data;
+          this.addEventTodos(this.planID);
+          this.todoList.push(res.data);
           // clear form inputs, this is a total hack way of doing this but its the only way I found that actually worked for me
-          this.taskName = ''
-          this.dueDate = ''
-          this.notes = ''
+          this.taskName = "";
+          this.dueDate = "";
+          this.notes = "";
           // console.log(this.todoList);
         },
         err => {
@@ -81,8 +79,6 @@ app.controller("PlanController", [
         }
       );
     };
-
-
 
     // update event
     this.updateEvent = function(event) {
@@ -121,5 +117,35 @@ app.controller("PlanController", [
     this.getEvent();
 
     // this.getTodos();
+
+  // create user
+  this.createUser = function() {
+    $http({
+      method: 'POST',
+      url: '/users',
+      data: {
+        username: this.username,
+        password: this.password
+      }
+    }).then(function(response) {
+      console.log(response);
+    }, function() {
+      console.log('error');
+    });
   }
-]); // this closes PlanController
+  // user log in
+  this.logIn = function() {
+    $http({
+      method: 'POST',
+      url: '/sessions',
+      data: {
+        username: this.username,
+        password: this.password
+      }
+    }).then(function(response) {
+      console.log(response);
+    }, function() {
+      console.log('error');
+    });
+  }
+}]); // this closes PlanController
