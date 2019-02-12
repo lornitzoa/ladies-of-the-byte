@@ -1,9 +1,8 @@
+const app = angular.module("PlanApp", []);
 
-const app = angular.module('PlanApp', [])
-
-
-
-app.controller('PlanController', ['$http', function ($http) {
+app.controller("PlanController", [
+  "$http",
+  function($http) {
     const controller = this;
     this.showAddEventForm = false;
     this.showAddTask = false;
@@ -53,7 +52,7 @@ app.controller('PlanController', ['$http', function ($http) {
       this.image = this.iconURL
     }
 
-
+    this.indexOfFormToShow = null;
     // create event
     this.createEvent = () => {
       // this.image = this.iconURL
@@ -221,3 +220,4 @@ app.controller('PlanController', ['$http', function ($http) {
     })
   }
 }]); // this closes PlanController
+
