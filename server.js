@@ -14,6 +14,9 @@ const NounProject = require('the-noun-project')
 // })
 
 
+const port = process.env.PORT || 3000;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'planit'
+
 app.use(session({
 	secret: "feedmeseymour",
 	resave: false,
@@ -22,23 +25,6 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.static("public"));
-
-// save user info
-// app.get('/login', (req, res) => {
-//   res.json()
-// });
-
-// retrieve user info saved on the session object
-app.get('/', (req, res) => {
-  if (req.session.currentUser) {
-    res.json(req.session.currentUser);
-  } else {
-    res.status(401).json({
-      status: 401,
-      message: 'not logged in'
-    });
-  }
-});
 
 const userController = require('./controllers/users.js')
 app.use('/users', userController);

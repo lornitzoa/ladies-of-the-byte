@@ -17,13 +17,14 @@
         <div class="headerCard">
           <nav>
             <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
-            <a href="/views/auth.html">sign up</a>
+            <a href="/views/auth.html">sign up</a> <button ng-click="ctrl.logOut()">Log Out</button>
           </nav>
         </div>
       </div>
-      <h1>Hi. This is planit.</h1>
+      <h1 ng-if="ctrl.loggedInUsername">Hi, {{ctrl.loggedInUsername}}! This is planit.</h1>
       <h3>we're here to sweat the small stuff while you enjoy the ride.</h3>
       <br />
+
       <button ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
         add event
       </button>

@@ -12,6 +12,10 @@ app.controller('PlanController', ['$http', function ($http) {
     this.planID = "";
     // array for todoList
     this.todoList = [];
+
+    this.showCreateUser = false;
+    this.showLogInUser = false;
+
     // variable to hold icon url
     this.iconURL = ''
 
@@ -48,6 +52,7 @@ app.controller('PlanController', ['$http', function ($http) {
       // set image input to selected icon url
       this.image = this.iconURL
     }
+
 
     // create event
     this.createEvent = () => {
@@ -183,13 +188,36 @@ app.controller('PlanController', ['$http', function ($http) {
       method: 'POST',
       url: '/sessions',
       data: {
-        username: this.username,
-        password: this.password
+        username: this.usernameLogIn,
+        password: this.passwordLogIn
       }
     }).then(function(response) {
       console.log(response);
+      controller.goApp();
     }, function() {
       console.log('error');
     });
+  }
+  this.goApp = function() {
+    $http({
+      method: 'GET',
+      url: '/users'
+    }).then(function (response) {
+      controller.loggedInUsername = response.data.username;
+      console.log(response.data);
+    }, function () {
+      console.log('error');
+    });
+  }
+  this.goApp()
+
+  this.logOut = function () {
+    $http({
+      method: 'DELETE',
+      url: '/sessions'
+    }).then(function (response)  {
+      controller.loggedInUsername = undefined;
+      console.log(response);
+    })
   }
 }]); // this closes PlanController

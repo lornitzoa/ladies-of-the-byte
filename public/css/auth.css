@@ -1,0 +1,21 @@
+.newUser {
+  background: #00A2CE;
+  float: left;
+  width: 45%;
+  border-radius: 20%;
+}
+
+.returningUser {
+  background-color: #CC5300;
+  float: right;
+  width: 45%;
+  border-radius: 20%;
+}
+
+.container {
+  width: 90%;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightgray
+}
