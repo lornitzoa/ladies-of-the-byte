@@ -220,4 +220,3 @@ app.controller("PlanController", [
     })
   }
 }]); // this closes PlanController
-
