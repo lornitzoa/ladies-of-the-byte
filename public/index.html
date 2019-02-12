@@ -88,6 +88,7 @@
         <form  id='frmIconSearch' ng-submit='ctrl.searchIcons()'>
           <input type="text" id='txtIconSearch' ng-model='ctrl.txtSearchIcons'>
           <input type="submit" name="" value="Search">
+          <button type="button" ng-click='ctrl.openIconSearchModal = false'>Cancel</button>
         </form>
         <div id="iconSearchResults" ng-class='iconSearchResults'>
           <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}"  class='icon' ng-click='ctrl.sendIconToDB(icon.attribution_preview_url)'>
