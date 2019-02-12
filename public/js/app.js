@@ -163,4 +163,14 @@ app.controller('PlanController', ['$http', function ($http) {
     });
   }
   this.goApp()
+
+  this.logOut = function () {
+    $http({
+      method: 'DELETE',
+      url: '/sessions'
+    }).then(function (response)  {
+      controller.loggedInUsername = undefined;
+      console.log(response);
+    })
+  }
 }]); // this closes PlanController
