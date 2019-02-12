@@ -25,7 +25,7 @@
       <h3>we're here to sweat the small stuff while you enjoy the ride.</h3>
       <br />
 
-      <button ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
+      <button ng-if="ctrl.loggedInUsername" ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
         add event
       </button>
 

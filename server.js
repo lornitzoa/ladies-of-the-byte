@@ -2,20 +2,12 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
+const db = mongoose.connection;
 const NounProject = require('the-noun-project')
-//
-// nounProject = new NounProject({
-// 	key: 'c6bed03aeb604f4eac8be077e9d9e31e',
-// 	secret: 'e0854062025240839e319e527a65cff9'
-// })
-//
-// nounProject.getIconsByTerm('goat', (err, data) => {
-// 	console.log(data.icons);
-// })
-
 
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'planit'
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'heroku'
 
 app.use(session({
 	secret: "feedmeseymour",
