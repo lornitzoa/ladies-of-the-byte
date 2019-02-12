@@ -1,21 +1,50 @@
-.newUser {
+#newbie{
   background: #00A2CE;
   float: left;
   width: 45%;
   border-radius: 20%;
 }
 
-.returningUser {
+#guru {
   background-color: #CC5300;
   float: right;
   width: 45%;
   border-radius: 20%;
 }
 
-.container {
-  width: 90%;
-  height: 90%;
+#container {
+  width: auto;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
-  background-color: lightgray
+  background-color: #FFBD00;
+}
+
+body {
+  background-color: #BF8A70;
+  height: 80%;
+}
+
+.bd-example {
+ width: 30%;
+ /* height: 50%; */
+ display: flex;
+ justify-content: space-around;
+ padding: 60px;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+.carousel-inner {
+  width: 50%;
+  padding: 10px;
+}
+.carousel-inner img {
+  width: 100%;
+  border-radius: 10px;
+  display: none;
+}
+
+.carousel-inner img: first-of-type {
+  display: block;
 }
