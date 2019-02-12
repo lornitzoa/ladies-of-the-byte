@@ -175,12 +175,16 @@ app.controller("PlanController", [
         username: this.username,
         password: this.password
       }
-    }).then(function(response) {
-      console.log(response);
+    }).then(
+      response => {
+        this.username = "";
+        this.password = "";
+      // console.log(response);
     }, function() {
       console.log('error');
     });
   }
+
   // user log in
   this.logIn = function() {
     $http({
@@ -190,33 +194,44 @@ app.controller("PlanController", [
         username: this.usernameLogIn,
         password: this.passwordLogIn
       }
-    }).then(function(response) {
-      console.log(response);
-      controller.goApp();
-    }, function() {
-      console.log('error');
-    });
+    }).then(
+      response => {
+        controller.goApp();
+        this.usernameLogIn = "";
+        this.passwordLogIn = "";
+      },
+      err => {
+        console.log(err);
+      }
+    // .then(function(response) {
+    //   // console.log(response);
+    //   controller.goApp();
+    // }, function() {
+    //   console.log('error');
+    );
   }
+
+// access for users
   this.goApp = function() {
     $http({
       method: 'GET',
       url: '/users'
     }).then(function (response) {
       controller.loggedInUsername = response.data.username;
-      console.log(response.data);
+      // console.log(response.data);
     }, function () {
       console.log('error');
     });
   }
   this.goApp()
-
+// log out
   this.logOut = function () {
     $http({
       method: 'DELETE',
       url: '/sessions'
     }).then(function (response)  {
       controller.loggedInUsername = undefined;
-      console.log(response);
+      // console.log(response);
     })
   }
 }]); // this closes PlanController
