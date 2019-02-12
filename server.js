@@ -2,9 +2,11 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
+const db = mongoose.connection;
 
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'planit'
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'heroku'
 
 app.use(session({
 	secret: "feedmeseymour",
