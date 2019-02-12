@@ -2,10 +2,13 @@
 <html lang="en" dir="ltr" ng-app="PlanApp">
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Planit</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="js/api.js" charset="utf-8"></script>
     <script src="js/app.js" charset="utf-8"></script>
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/api.css">
   </head>
   <body ng-controller="PlanController as ctrl">
     <header>
@@ -25,12 +28,18 @@
       <button ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
         add event
       </button>
-      <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()">
+
+      <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()" id='newPlan'>
         <input type="text" placeholder="Title" ng-model="ctrl.title" />
         <input type="text" placeholder="mm/dd/yy" ng-model="ctrl.date" />
         <input type="text" placeholder="Location" ng-model="ctrl.location" />
+        <!-- AL added: input for image url -->
+        <input type="text"  placeholder="image" ng-model='ctrl.image' id='txtIconURL'>
+        <!-- opens modal to search for icon from API -->
+        <button type="button" ng-click='ctrl.showIconSearch()'>Add Icon</button>
         <input type="submit" class="button" value="plan it" />
       </form>
+
     </header>
     <h2>"becoming is better than being."</h2>
     <div class="cards">
@@ -74,6 +83,17 @@
           <input type="submit" class="button" value="submit" />
         </form>
       </div>
+    </div>
+    <div class="iconModal" ng-show="ctrl.openIconSearchModal">
+
+        <form  id='frmIconSearch' ng-submit='ctrl.searchIcons()'>
+          <input type="text" id='txtIconSearch' ng-model='ctrl.txtSearchIcons'>
+          <input type="submit" name="" value="Search">
+          <button type="button" ng-click='ctrl.openIconSearchModal = false'>Cancel</button>
+        </form>
+        <div id="iconSearchResults" ng-class='iconSearchResults'>
+          <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}"  class='icon' ng-click='ctrl.sendIconToDB(icon.attribution_preview_url)'>
+        </div>
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
   </body>
