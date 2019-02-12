@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const db = mongoose.connection;
+const NounProject = require('the-noun-project')
 
 const port = process.env.PORT || 3000;
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'heroku'
@@ -28,6 +29,10 @@ app.use('/plan', planController);
 
 const todoController = require('./controllers/todos.js');
 app.use('/todo', todoController);
+
+// dependency for api route
+const apiController = require('./controllers/iconapi.js');
+app.use('/iconapi', apiController)
 
 app.listen(3000, () => {
   console.log('listening...');

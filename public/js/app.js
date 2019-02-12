@@ -1,17 +1,61 @@
-const app = angular.module('PlanApp', [])
+const app = angular.module("PlanApp", []);
 
-app.controller('PlanController', ['$http', function ($http) {
+app.controller("PlanController", [
+  "$http",
+  function($http) {
     const controller = this;
     this.showAddEventForm = false;
     this.showAddTask = false;
     this.showUpdateForm = false;
+    // global variable for planID for adding todos to plan
     this.planID = "";
+    // array for todoList
     this.todoList = [];
+
     this.showCreateUser = false;
     this.showLogInUser = false;
 
+    // variable to hold icon url
+    this.iconURL = ''
+
+
+    // allows for show/hide of icon search iconModal
+    this.showIconSearch = (image) => {
+      this.openIconSearchModal = true
+    }
+
+    // search icons API
+    this.searchIcons = () => {
+      // clears search results before repopulating
+      this.iconSearchResults = []
+      // console.log(this.txtSearchIcons);
+      $http({
+        method: 'GET',
+        url: `/iconapi/${this.txtSearchIcons}`
+      }).then(
+        (res) => {
+          // set variable for icons array for view to show
+          this.icons = res.data.icons
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
+
+    this.sendIconToDB = (icon) => {
+      // set global iconURL variable to clicked icon url
+      this.iconURL = icon
+      // close icon search modal
+      this.openIconSearchModal = false
+      // set image input to selected icon url
+      this.image = this.iconURL
+    }
+
+    this.indexOfFormToShow = null;
     // create event
     this.createEvent = () => {
+      // this.image = this.iconURL
       $http({
         method: "POST",
         url: "/plan",
@@ -23,14 +67,15 @@ app.controller('PlanController', ['$http', function ($http) {
         }
       }).then(
         (res) => {
-          this.plan = res.data
+          // set global planID variable for adding todos
           this.planID = res.data._id
-          controller.events.push(res.data);
+          // push event into array to display
+          this.events.push(res.data);
+          // clear input boxes
           this.title = ''
           this.date = ''
           this.location = ''
           this.image = ''
-          controller.events.push(res.data);
         },
         err => {
           console.log(err);
@@ -38,6 +83,7 @@ app.controller('PlanController', ['$http', function ($http) {
       );
     };
 
+    // add todo item to plan todo array
     this.createTodo = () => {
       $http({
         method: "POST",
@@ -174,3 +220,4 @@ app.controller('PlanController', ['$http', function ($http) {
     })
   }
 }]); // this closes PlanController
+

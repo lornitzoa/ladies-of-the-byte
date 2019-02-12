@@ -21,6 +21,8 @@
     "bcrypt": "^3.0.4",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "mongoose": "^5.4.10"
+    "mongoose": "^5.4.10",
+    "oauth": "^0.9.15",
+    "the-noun-project": "^2.1.0"
   }
 }
