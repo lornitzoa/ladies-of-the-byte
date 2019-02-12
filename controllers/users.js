@@ -22,4 +22,15 @@ router.post('/', (req, res) => {
   });
 });
 
+router.get('/', (req, res) => {
+  if (req.session.currentUser) {
+    res.json(req.session.currentUser);
+  } else {
+    res.status(401).json({
+      status: 401,
+      message: 'not logged in'
+    });
+  }
+});
+
 module.exports = router;
