@@ -32,6 +32,8 @@
         <input type="text" placeholder="Title" ng-model="ctrl.title" />
         <input type="text" placeholder="mm/dd/yy" ng-model="ctrl.date" />
         <input type="text" placeholder="Location" ng-model="ctrl.location" />
+        <!-- AL added: input for image url -->
+        <input type="text"  placeholder="image" ng-model='ctrl.image' id='txtIconURL'>
         <!-- opens modal to search for icon from API -->
         <button type="button" ng-click='ctrl.showIconSearch()'>Add Icon</button>
         <input type="submit" class="button" value="plan it" />
@@ -88,7 +90,7 @@
           <input type="submit" name="" value="Search">
         </form>
         <div id="iconSearchResults" ng-class='iconSearchResults'>
-          <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}" alt="" class='icon'>
+          <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}"  class='icon' ng-click='ctrl.sendIconToDB(icon.attribution_preview_url)'>
         </div>
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
