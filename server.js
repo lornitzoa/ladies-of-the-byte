@@ -7,7 +7,7 @@ const db = mongoose.connection;
 const NounProject = require('the-noun-project')
 
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'heroku'
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/' + 'heroku';
 
 app.use(session({
 	secret: "feedmeseymour",
