@@ -8,6 +8,7 @@ app.controller("PlanController", [
     this.showAddEventForm = false;
     this.showAddTask = false;
     this.showUpdateForm = false;
+    this.showModal = false;
     this.planID = "";
     this.todoList = [];
     this.indexOfFormToShow = null;

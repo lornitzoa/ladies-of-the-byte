@@ -38,39 +38,13 @@
         <div class="eventInfo">
           <h3>{{event.title}}</h3>
           <p>{{event.location}}</p>
-          <p>{{event.date}}</p>
+          <p>{{event.date | date : "longDate"}}</p>
         </div>
         <button ng-click="ctrl.showAddTask = !ctrl.showAddTask">
           add task
         </button>
-
-        <button
-          ng-click="ctrl.showUpdateForm = !ctrl.showUpdateForm; ctrl.indexOfFormToShow = $index"
-        >
-          update
-        </button>
-        <button
-          ng-click="ctrl.deleteEvent(event); ctrl.indexOfFormToShow = $index"
-        >
-          delete
-        </button>
-        <form
-          ng-submit="ctrl.createTodo()"
-          ng-if="ctrl.showAddTask && ($index === ctrl.indexOfFormToShow)"
-        >
-          <input type="text" placeholder="Task" ng-model="ctrl.taskName" />
-          <input
-            type="text"
-            placeholder="Due mm/dd/yy"
-            ng-model="ctrl.dueDate"
-          />
-          <input type="text" placeholder="Notes" ng-model="ctrl.notes" />
-          <input type="submit" class="button" value="submit" />
-        </form>
-        <form
-          ng-if="ctrl.showUpdateForm && ($index === ctrl.indexOfFormToShow)"
-          ng-submit="ctrl.updateEvent(event)"
-        >
+        update
+        <form ng-submit="ctrl.updateEvent(event)">
           <input type="text" ng-model="ctrl.updatedTitle" placeholder="title" />
           <input
             type="text"
@@ -84,6 +58,50 @@
           />
           <input type="submit" class="button" value="submit" />
         </form>
+        <!-- modal start -->
+        <button id="modalBtn" class="button" ng-click="ctrl.showModal = true">
+          details
+        </button>
+        <div id="simpleModal" class="modal" ng-if="ctrl.showModal">
+          <div class="modalContent">
+            <span ng-click="ctrl.showModal = false" class="closeBtn"
+              >&times;</span
+            >
+            update
+            <form ng-submit="ctrl.updateEvent(event)">
+              <input
+                type="text"
+                ng-model="ctrl.updatedTitle"
+                placeholder="title"
+              />
+              <input
+                type="text"
+                ng-model="ctrl.updatedLocation"
+                placeholder="location"
+              />
+              <input
+                type="text"
+                ng-model="ctrl.updatedDate"
+                placeholder="mm/dd/yy"
+              />
+              <input type="submit" class="button" value="submit" />
+            </form>
+            task list
+            <form ng-submit="event.createTodo()">
+              <input type="text" placeholder="Task" ng-model="event.taskName" />
+              <input
+                type="text"
+                placeholder="Due mm/dd/yy"
+                ng-model="ctrl.dueDate"
+              />
+              <input type="text" placeholder="Notes" ng-model="event.notes" />
+              <input type="submit" class="button" value="submit" />
+            </form>
+          </div>
+        </div>
+        <!-- modal end -->
+
+        <button ng-click="ctrl.deleteEvent(event)">delete</button>
       </div>
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
