@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/' + 'heroku';
 
 app.use(session({
-	secret: "feedmeseymour",
+	secret: process.env.SECRET,
 	resave: false,
 	saveUninitialized: false
 }));
