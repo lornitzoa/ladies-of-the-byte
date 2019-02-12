@@ -1,4 +1,7 @@
+
 const app = angular.module('PlanApp', [])
+
+
 
 app.controller('PlanController', ['$http', function ($http) {
     const controller = this;
@@ -7,6 +10,30 @@ app.controller('PlanController', ['$http', function ($http) {
     this.showUpdateForm = false;
     this.planID = "";
     this.todoList = [];
+
+    // allows for show/hide of icon search iconModal
+    this.showIconSearch = () => {
+      this.openIconSearchModal = true
+    }
+
+    // search icons API
+    this.searchIcons = () => {
+      // console.log(this.txtSearchIcons);
+      $http({
+        method: 'GET',
+        url: `/iconapi/${this.txtSearchIcons}`,
+
+
+      }).then(
+        (res) => {
+          this.icons = res.data.icons
+          // console.log(typeof this.icons);
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
 
     // create event
     this.createEvent = () => {
@@ -36,6 +63,11 @@ app.controller('PlanController', ['$http', function ($http) {
       );
     };
 
+    this.openIconSearch = () => {
+
+    }
+
+    // add todo item to plan todo array
     this.createTodo = () => {
       $http({
         method: "POST",
