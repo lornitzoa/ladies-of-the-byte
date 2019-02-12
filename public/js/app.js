@@ -18,6 +18,8 @@ app.controller('PlanController', ['$http', function ($http) {
 
     // search icons API
     this.searchIcons = () => {
+      // clears search results before repopulating
+      this.iconSearchResults = []
       // console.log(this.txtSearchIcons);
       $http({
         method: 'GET',
@@ -27,6 +29,7 @@ app.controller('PlanController', ['$http', function ($http) {
       }).then(
         (res) => {
           this.icons = res.data.icons
+
           // console.log(typeof this.icons);
         },
         (err) => {

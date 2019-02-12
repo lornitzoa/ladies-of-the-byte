@@ -87,11 +87,9 @@
           <input type="text" id='txtIconSearch' ng-model='ctrl.txtSearchIcons'>
           <input type="submit" name="" value="Search">
         </form>
-        <div class="iconSearchResults">
+        <div id="iconSearchResults" ng-class='iconSearchResults'>
           <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}" alt="" class='icon'>
         </div>
-    
-
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
   </body>
