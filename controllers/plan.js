@@ -2,9 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Plans = require("../models/planModel.js");
 
+
+
 router.get("/", (req, res) => {
   Plans.find({}, (err, foundPlan) => {
     res.json(foundPlan);
+
   });
 });
 
@@ -16,6 +19,8 @@ router.delete("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   Plans.create(req.body, (err, createdPlan) => {
+    console.log("err", err);
+
     res.json(createdPlan);
   });
 });

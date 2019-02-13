@@ -12,7 +12,7 @@ body {
 
 header {
   color: whitesmoke;
-  height: 350px;
+  height: 600px;
   background: url("https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
     no-repeat center center fixed;
   background-size: cover;
@@ -24,17 +24,19 @@ header {
   padding: 5px;
 }
 
-.card {
-  width: 250px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  margin: 10px;
-  padding: 20px;
+header > button {
+  margin-top: 30px;
+  font-size: 25px;
 }
 
-h5 {
-  margin-top: 5px;
-  margin-bottom: 20px;
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+a:hover {
+  color: lightgray;
 }
 
 nav,
@@ -46,30 +48,58 @@ nav > a {
   margin: 5px;
 }
 
-button {
+h1 {
+  font-size: 55px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid gray;
+  border-radius: 5px;
   margin: 10px;
+  padding: 10px;
 }
 
 .eventInfo {
-  margin-top: 15px;
+  margin-top: 7px;
 }
 
 img {
-  margin-bottom: 5px;
   width: 60px;
 }
 
-a {
-  color: whitesmoke;
-  text-decoration: none;
+.eventInfo > h3 {
+  margin: 0;
+  font-size: 25px;
 }
 
-a:hover {
-  color: gray;
+.eventInfo > p {
+  margin: 4px;
+  font-size: 20px;
+}
+
+h5 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 10px;
+  font-size: 15px;
 }
 
 .button {
-  margin-top: 8px;
   font-family: "Amatic SC", cursive;
   border: 1px solid lightgray;
   border-radius: 5px;
