@@ -32,6 +32,7 @@
       <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()" id='newPlan'>
         <input type="text" placeholder="Title" ng-model="ctrl.title" />
         <input type="text" placeholder="mm/dd/yy" ng-model="ctrl.date" />
+        <input type="date" placeholder="mm/dd/yy" ng-model="ctrl.date" />
         <input type="text" placeholder="Location" ng-model="ctrl.location" />
         <!-- AL added: input for image url -->
         <input type="text"  placeholder="image" ng-model='ctrl.image' id='txtIconURL'>
@@ -47,7 +48,7 @@
         <div class="eventInfo">
           <h3>{{event.title}}</h3>
           <p>{{event.location}}</p>
-          <p>{{event.date}}</p>
+          <p>{{event.date | date: 'MM/dd/yyyy'}}</p>
         </div>
         <button ng-click="ctrl.showAddTask = !ctrl.showAddTask">
           add task
@@ -61,21 +62,22 @@
         </button>
 
         <!-- modal start -->
-        <button id="modalBtn" class="button" ng-click="event.modal = true">
+        <button id="modalBtn" class="button" ng-click="event.modal = true; ctrl.getPlanTodos(event._id)">
           details
         </button>
         <div id="simpleModal" class="modal" ng-if="event.modal">
           <div class="modalContent">
             {{event.title}} task list<br />
             <ul>
-              <li ng-repeat="todo in event.todos">{{todo.taskName}}</li>
+              <li ng-repeat="todo in ctrl.todoList">{{todo.taskName}}: {{todo.dueDate | date: 'MM/dd/yyyy'}} <br/>
+                Notes: {{todo.notes}} <button type="button" ng-click='ctrl.deleteTodo()'>Delete</button> </li>
             </ul>
-
-            <span ng-click="event.modal = false" class="closeBtn">&times;</span>
+                                                <!-- clears todoList for next details click -->
+            <span ng-click="event.modal = false; ctrl.todoList = []" class="closeBtn">&times;</span>
             <form ng-submit="ctrl.createTodo(event)">
               <input type="text" placeholder="Task" ng-model="ctrl.taskName" />
               <input
-                type="text"
+                type="date"
                 placeholder="Due mm/dd/yy"
                 ng-model="ctrl.dueDate"
               />
@@ -98,7 +100,7 @@
             placeholder="location"
           />
           <input
-            type="text"
+            type="date"
             ng-model="ctrl.updatedDate"
             placeholder="mm/dd/yy"
           />

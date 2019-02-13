@@ -8,6 +8,12 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+  Plans.findById(req.params.id, (err, foundPlanTodos) => {
+    res.json(foundPlanTodos)
+  })
+})
+
 router.delete("/:id", (req, res) => {
   Plans.findByIdAndRemove(req.params.id, (err, deletedPlan) => {
     res.json(deletedPlan);
