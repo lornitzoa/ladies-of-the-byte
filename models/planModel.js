@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // const Todos = require('../models/todoModel.js')
 
@@ -8,12 +8,13 @@ const PlanSchema = new mongoose.Schema({
     required: true
   },
   date: Date,
+  modal: Boolean,
   location: String,
   // image: String // we can change this to url later
   image: String, // we can change this to url later
-  todos: {type: Array}
+  todos: { type: Array }
 });
 
-const Plans = mongoose.model('Plan', PlanSchema);
+const Plans = mongoose.model("Plan", PlanSchema);
 
 module.exports = Plans;

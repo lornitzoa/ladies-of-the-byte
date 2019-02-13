@@ -8,7 +8,6 @@ app.controller("PlanController", [
     this.showAddEventForm = false;
     this.showAddTask = false;
     this.showUpdateForm = false;
-    this.showModal = false;
     this.planID = "";
     this.todoList = [];
     this.indexOfFormToShow = null;
@@ -21,6 +20,7 @@ app.controller("PlanController", [
           title: this.title,
           date: this.date,
           location: this.location,
+          modal: this.modal,
           image: this.image
         }
       }).then(
@@ -39,7 +39,7 @@ app.controller("PlanController", [
       );
     };
 
-    this.createTodo = () => {
+    this.createTodo = event => {
       $http({
         method: "POST",
         url: "/todo",
@@ -51,7 +51,7 @@ app.controller("PlanController", [
       }).then(
         res => {
           this.todoItem = res.data;
-          this.addEventTodos(this.planID);
+          this.addEventTodos(event._id);
           this.todoList.push(res.data);
           // clear form inputs, this is a total hack way of doing this but its the only way I found that actually worked for me
           this.taskName = "";
@@ -67,6 +67,7 @@ app.controller("PlanController", [
 
     // add todo list items via update
     this.addEventTodos = eventID => {
+      console.log(eventID);
       $http({
         method: "PUT",
         url: "/plan/" + eventID,
@@ -94,6 +95,9 @@ app.controller("PlanController", [
           location: this.updatedLocation,
           image: this.updatedImage
         }
+      }).then(function(response) {
+        controller.showUpdateForm = !controller.showUpdateForm;
+        controller.getEvent();
       });
     };
     // delete event
@@ -115,6 +119,7 @@ app.controller("PlanController", [
         url: "/plan"
       }).then(function(response) {
         controller.events = response.data;
+        console.log(controller.events);
       });
     };
     this.getEvent();
