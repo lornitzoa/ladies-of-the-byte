@@ -63,7 +63,7 @@ app.controller("PlanController", [
           title: this.title,
           date: this.date,
           location: this.location,
-          image: this.image
+          image: this.image,
           modal: this.modal,
 
         }
@@ -78,7 +78,7 @@ app.controller("PlanController", [
           this.date = ''
           this.location = ''
           this.image = ''
-         
+
         },
         err => {
           console.log(err);
@@ -119,7 +119,8 @@ app.controller("PlanController", [
         method: "PUT",
         url: "/plan/" + eventID,
         data: {
-          todos: this.todoItem
+          // update plan todo with current todoList
+          todos: this.todoList
         }
       }).then(
         res => {
@@ -130,6 +131,36 @@ app.controller("PlanController", [
         }
       );
     };
+
+    // getting todo items from selected plan by plan id
+    this.getPlanTodos = (eventID) => {
+      // console.log(eventID);
+      $http({
+        method: 'GET',
+        url: '/plan/' + eventID
+      }).then(
+        (res) => {
+          // set variable for returned plan todos
+          let planTodos = res.data.todos
+          // for each todo in plan todo key
+          for(let i = 0; i < planTodos.length; i++) {
+            // push the todo to the global todoList array
+            this.todoList.push(planTodos[i])
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+
+      )
+    }
+
+    // this.deleteTodo = () => {
+    //   $http({
+    //     method: 'DELETE',
+    //     url: '/todo/'
+    //   })
+    // }
 
     // update event
     this.updateEvent = function(event) {
@@ -241,4 +272,3 @@ app.controller("PlanController", [
     })
   }
 }]); // this closes PlanController
-
