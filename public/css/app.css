@@ -30,6 +30,14 @@ header > button {
   font-size: 25px;
 }
 
+input {
+  font-size: 20px;
+}
+
+#dateBox {
+  font-size: 18px;
+}
+
 a {
   color: whitesmoke;
   text-decoration: none;
@@ -97,17 +105,20 @@ h5 {
 
 button {
   margin: 10px;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .button {
+  margin: 10px;
+  font-size: 20px;
   font-family: "Amatic SC", cursive;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: 1px solid gray;
+  background: whitesmoke;
+  /* border-radius: 5px; */
 }
 
 .button:hover {
-  background: crimson;
+  background: #ccc;
 }
 
 .modal {
@@ -118,7 +129,7 @@ button {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .modalContent {
@@ -126,13 +137,25 @@ button {
   margin: 20% auto;
   padding: 20px;
   width: 70%;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.1), 0 7px 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.3), 0 7px 20px 0 rgba(0, 0, 0, 0.3);
+  font-size: 30px;
+  border: 2px solid gold;
+}
+
+.modalContent > h1 {
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+.modalContent > ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 .closeBtn {
   color: #ccc;
   float: right;
-  font-size: 30px;
+  font-size: 90px;
 }
 
 .closeBtn:hover,
