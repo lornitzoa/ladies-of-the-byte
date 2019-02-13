@@ -1,6 +1,9 @@
 {
   "name": "ladies-of-the-byte",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.4.0"
+  },
   "description": "WDIR Unit 3 Group Project",
   "main": "server.js",
   "scripts": {
