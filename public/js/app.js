@@ -63,12 +63,7 @@ app.controller("PlanController", [
           date: this.date,
           location: this.location,
           image: this.image,
-<<<<<<< HEAD
           modal: this.modal
-=======
-          modal: this.modal,
-
->>>>>>> 59485fe3a65f08b670be21755577520076f6e390
         }
       }).then(
         res => {
@@ -77,18 +72,10 @@ app.controller("PlanController", [
           // push event into array to display
           this.events.push(res.data);
           // clear input boxes
-<<<<<<< HEAD
           this.title = "";
           this.date = "";
           this.location = "";
           this.image = "";
-=======
-          this.title = ''
-          this.date = ''
-          this.location = ''
-          this.image = ''
-
->>>>>>> 59485fe3a65f08b670be21755577520076f6e390
         },
         err => {
           console.log(err);
@@ -142,27 +129,26 @@ app.controller("PlanController", [
     };
 
     // getting todo items from selected plan by plan id
-    this.getPlanTodos = (eventID) => {
+    this.getPlanTodos = eventID => {
       // console.log(eventID);
       $http({
-        method: 'GET',
-        url: '/plan/' + eventID
+        method: "GET",
+        url: "/plan/" + eventID
       }).then(
-        (res) => {
+        res => {
           // set variable for returned plan todos
-          let planTodos = res.data.todos
+          let planTodos = res.data.todos;
           // for each todo in plan todo key
-          for(let i = 0; i < planTodos.length; i++) {
+          for (let i = 0; i < planTodos.length; i++) {
             // push the todo to the global todoList array
-            this.todoList.push(planTodos[i])
+            this.todoList.push(planTodos[i]);
           }
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-
-      )
-    }
+      );
+    };
 
     // this.deleteTodo = () => {
     //   $http({
@@ -286,8 +272,4 @@ app.controller("PlanController", [
       });
     };
   }
-<<<<<<< HEAD
 ]); // this closes PlanController
-=======
-}]); // this closes PlanController
->>>>>>> 59485fe3a65f08b670be21755577520076f6e390
