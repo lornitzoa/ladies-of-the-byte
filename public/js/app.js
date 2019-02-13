@@ -4,15 +4,58 @@ app.controller("PlanController", [
   "$http",
   function($http) {
     const controller = this;
-
     this.showAddEventForm = false;
     this.showAddTask = false;
     this.showUpdateForm = false;
+    // global variable for planID for adding todos to plan
     this.planID = "";
+    // array for todoList
     this.todoList = [];
+
+    this.showCreateUser = false;
+    this.showLogInUser = false;
+
+    // variable to hold icon url
+    this.iconURL = ''
+
+
+    // allows for show/hide of icon search iconModal
+    this.showIconSearch = (image) => {
+      this.openIconSearchModal = true
+    }
+
+    // search icons API
+    this.searchIcons = () => {
+      // clears search results before repopulating
+      this.iconSearchResults = []
+      // console.log(this.txtSearchIcons);
+      $http({
+        method: 'GET',
+        url: `/iconapi/${this.txtSearchIcons}`
+      }).then(
+        (res) => {
+          // set variable for icons array for view to show
+          this.icons = res.data.icons
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+    }
+
+    this.sendIconToDB = (icon) => {
+      // set global iconURL variable to clicked icon url
+      this.iconURL = icon
+      // close icon search modal
+      this.openIconSearchModal = false
+      // set image input to selected icon url
+      this.image = this.iconURL
+    }
+
     this.indexOfFormToShow = null;
     // create event
     this.createEvent = () => {
+      // this.image = this.iconURL
       $http({
         method: "POST",
         url: "/plan",
@@ -20,24 +63,29 @@ app.controller("PlanController", [
           title: this.title,
           date: this.date,
           location: this.location,
-          modal: this.modal,
           image: this.image
+          modal: this.modal,
+
         }
       }).then(
-        res => {
-          this.plan = res.data;
-          this.planID = res.data._id;
-          this.title = "";
-          this.date = "";
-          this.location = "";
-          this.image = "";
-          controller.events.push(res.data);
+        (res) => {
+          // set global planID variable for adding todos
+          this.planID = res.data._id
+          // push event into array to display
+          this.events.push(res.data);
+          // clear input boxes
+          this.title = ''
+          this.date = ''
+          this.location = ''
+          this.image = ''
+         
         },
         err => {
           console.log(err);
         }
       );
     };
+
 
     this.createTodo = event => {
       $http({
@@ -67,7 +115,6 @@ app.controller("PlanController", [
 
     // add todo list items via update
     this.addEventTodos = eventID => {
-      console.log(eventID);
       $http({
         method: "PUT",
         url: "/plan/" + eventID,
@@ -119,48 +166,79 @@ app.controller("PlanController", [
         url: "/plan"
       }).then(function(response) {
         controller.events = response.data;
-        console.log(controller.events);
       });
     };
     this.getEvent();
 
     // this.getTodos();
 
-    // create user
-    this.createUser = function() {
-      $http({
-        method: "POST",
-        url: "/users",
-        data: {
-          username: this.username,
-          password: this.password
-        }
-      }).then(
-        function(response) {
-          console.log(response);
-        },
-        function() {
-          console.log("error");
-        }
-      );
-    };
-    // user log in
-    this.logIn = function() {
-      $http({
-        method: "POST",
-        url: "/sessions",
-        data: {
-          username: this.username,
-          password: this.password
-        }
-      }).then(
-        function(response) {
-          console.log(response);
-        },
-        function() {
-          console.log("error");
-        }
-      );
-    };
+  // create user
+  this.createUser = function() {
+    $http({
+      method: 'POST',
+      url: '/users',
+      data: {
+        username: this.username,
+        password: this.password
+      }
+    }).then(
+      response => {
+        this.username = "";
+        this.password = "";
+      // console.log(response);
+    }, function() {
+      console.log('error');
+    });
   }
-]); // this closes PlanController
+
+  // user log in
+  this.logIn = function() {
+    $http({
+      method: 'POST',
+      url: '/sessions',
+      data: {
+        username: this.usernameLogIn,
+        password: this.passwordLogIn
+      }
+    }).then(
+      response => {
+        controller.goApp();
+        this.usernameLogIn = "";
+        this.passwordLogIn = "";
+      },
+      err => {
+        console.log(err);
+      }
+    // .then(function(response) {
+    //   // console.log(response);
+    //   controller.goApp();
+    // }, function() {
+    //   console.log('error');
+    );
+  }
+
+// access for users
+  this.goApp = function() {
+    $http({
+      method: 'GET',
+      url: '/users'
+    }).then(function (response) {
+      controller.loggedInUsername = response.data.username;
+      // console.log(response.data);
+    }, function (err) {
+      console.log(err);
+    });
+  }
+  this.goApp()
+// log out
+  this.logOut = function () {
+    $http({
+      method: 'DELETE',
+      url: '/sessions'
+    }).then(function (response)  {
+      controller.loggedInUsername = undefined;
+      // console.log(response);
+    })
+  }
+}]); // this closes PlanController
+

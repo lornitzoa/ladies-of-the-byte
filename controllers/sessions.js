@@ -4,7 +4,7 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 
 // session end route
-router.delete('/views/auth.html', (req, res) => {
+router.delete('/', (req, res) => {
   req.session.destroy(() => {
     res.status(200).json({
       status: 200,

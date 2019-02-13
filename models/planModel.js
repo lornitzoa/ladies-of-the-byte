@@ -8,6 +8,7 @@ const PlanSchema = new mongoose.Schema({
     required: true
   },
   date: Date,
+
   modal: Boolean,
   location: String,
   // image: String // we can change this to url later

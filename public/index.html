@@ -2,10 +2,13 @@
 <html lang="en" dir="ltr" ng-app="PlanApp">
   <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Planit</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="js/api.js" charset="utf-8"></script>
     <script src="js/app.js" charset="utf-8"></script>
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/api.css">
   </head>
   <body ng-controller="PlanController as ctrl">
     <header>
@@ -14,38 +17,49 @@
         <div class="headerCard">
           <nav>
             <a href="#">home</a> <a href="#">calendar</a> <a href="#">about</a>
-            <a href="/views/auth.html">sign up</a>
+            <a href="/views/auth.html">sign up</a> <button ng-click="ctrl.logOut()">Log Out</button>
           </nav>
         </div>
       </div>
-      <h1>Hi. This is planit.</h1>
+      <h1 ng-if="ctrl.loggedInUsername">Hi, {{ctrl.loggedInUsername}}! This is planit.</h1>
       <h3>we're here to sweat the small stuff while you enjoy the ride.</h3>
       <br />
-      <button ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
+
+      <button ng-if="ctrl.loggedInUsername" ng-click="ctrl.showAddEventForm = !ctrl.showAddEventForm">
         add event
       </button>
-      <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()">
+
+      <form ng-if="ctrl.showAddEventForm" ng-submit="ctrl.createEvent()" id='newPlan'>
         <input type="text" placeholder="Title" ng-model="ctrl.title" />
         <input type="text" placeholder="mm/dd/yy" ng-model="ctrl.date" />
         <input type="text" placeholder="Location" ng-model="ctrl.location" />
+        <!-- AL added: input for image url -->
+        <input type="text"  placeholder="image" ng-model='ctrl.image' id='txtIconURL'>
+        <!-- opens modal to search for icon from API -->
+        <button type="button" ng-click='ctrl.showIconSearch()'>Add Icon</button>
         <input type="submit" class="button" value="plan it" />
       </form>
     </header>
     <h2>"becoming is better than being."</h2>
     <div class="cards">
       <div ng-repeat="event in ctrl.events" class="card">
-        <img src="img/003-challenge.png" alt="" /> <br />
+        <img src="{{event.image}}" alt="" /> <br />
         <div class="eventInfo">
           <h3>{{event.title}}</h3>
           <p>{{event.location}}</p>
-          <p>{{event.date | date : "longDate"}}</p>
+          <p>{{event.date}}</p>
         </div>
+        <button ng-click="ctrl.showAddTask = !ctrl.showAddTask">
+          add task
+        </button>
+
 
         <button
           ng-click="ctrl.showUpdateForm = !ctrl.showUpdateForm; ctrl.indexOfFormToShow = $index"
         >
           update
         </button>
+
         <!-- modal start -->
         <button id="modalBtn" class="button" ng-click="event.modal = true">
           details
@@ -95,7 +109,18 @@
             value="submit"
           />
         </form>
+        </div>
       </div>
+    <div class="iconModal" ng-show="ctrl.openIconSearchModal">
+
+        <form  id='frmIconSearch' ng-submit='ctrl.searchIcons()'>
+          <input type="text" id='txtIconSearch' ng-model='ctrl.txtSearchIcons'>
+          <input type="submit" name="" value="Search">
+          <button type="button" ng-click='ctrl.openIconSearchModal = false'>Cancel</button>
+        </form>
+        <div id="iconSearchResults" ng-class='iconSearchResults'>
+          <img ng-repeat='icon in ctrl.icons' src="{{icon.attribution_preview_url}}"  class='icon' ng-click='ctrl.sendIconToDB(icon.attribution_preview_url)'>
+        </div>
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
   </body>
