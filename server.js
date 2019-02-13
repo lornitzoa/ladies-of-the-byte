@@ -35,7 +35,7 @@ app.use('/todo', todoController);
 const apiController = require('./controllers/iconapi.js');
 app.use('/iconapi', apiController)
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('listening...');
 });
 
