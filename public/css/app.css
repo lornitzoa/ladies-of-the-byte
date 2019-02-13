@@ -12,7 +12,8 @@ body {
 
 header {
   color: whitesmoke;
-  height: 600px;
+  height: 50vh;
+  min-height: 400px;
   background: url("https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
     no-repeat center center fixed;
   background-size: cover;
@@ -103,6 +104,42 @@ button {
   font-family: "Amatic SC", cursive;
   border: 1px solid lightgray;
   border-radius: 5px;
+}
+
+.button:hover {
+  background: crimson;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.modalContent {
+  background: #f4f4f4;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.1), 0 7px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.closeBtn {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 footer {

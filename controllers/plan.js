@@ -2,12 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Plans = require("../models/planModel.js");
 
-
-
 router.get("/", (req, res) => {
   Plans.find({}, (err, foundPlan) => {
     res.json(foundPlan);
-
   });
 });
 
@@ -26,6 +23,19 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+  console.log(req.body);
+  Plans.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedPlan) => {
+      res.json(updatedPlan);
+    }
+  );
+});
+
+router.post("/:id", (req, res) => {
+  console.log(req.body);
   Plans.findByIdAndUpdate(
     req.params.id,
     req.body,

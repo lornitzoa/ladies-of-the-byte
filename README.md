@@ -25,3 +25,6 @@ I took on the development of related models for our data base and connecting a 3
 - icon API: https://thenounproject.com/
 - icon API support: https://github.com/rosshettel/the-noun-project
 - clearing a div in angular: https://stackoverflow.com/questions/30107971/remove-content-from-div-angular
+=======
+
+
