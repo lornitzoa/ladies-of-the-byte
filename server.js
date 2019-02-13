@@ -6,11 +6,13 @@ const bcrypt = require('bcrypt');
 const db = mongoose.connection;
 const NounProject = require('the-noun-project')
 
+require('dotenv').config()
+
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/' + 'heroku'
+const mongoURI = process.env.MONGOLAB_CYAN_URI || 'mongodb://localhost:27017/' + 'planner';
 
 app.use(session({
-	secret: 'feedmeseymour',
+	secret: process.env.SECRET,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -18,23 +20,17 @@ app.use(session({
 app.use(express.json());
 app.use(express.static("public"));
 
-
-// save user info
-// app.get('/login', (req, res) => {
-//   res.json()
-// });
-
 // retrieve user info saved on the session object
-app.get('/', (req, res) => {
-  if (req.session.currentUser) {
-    res.json(req.session.currentUser);
-  } else {
-    res.status(401).json({
-      status: 401,
-      message: 'not logged in'
-    });
-  }
-});
+// app.get('/', (req, res) => {
+//   if (req.session.currentUser) {
+//     res.json(req.session.currentUser);
+//   } else {
+//     res.status(401).json({
+//       status: 401,
+//       message: 'not logged in'
+//     });
+//   }
+// });
 
 const userController = require('./controllers/users.js')
 app.use('/users', userController);
@@ -52,11 +48,13 @@ app.use('/todo', todoController);
 const apiController = require('./controllers/iconapi.js');
 app.use('/iconapi', apiController)
 
-app.listen(3000, () => {
+
+
+app.listen(port, () => {
   console.log('listening...');
 });
 
-mongoose.connect('mongodb://localhost:27017/planner', { useNewUrlParser: true });
+mongoose.connect(mongoURI, { useNewUrlParser: true });
 mongoose.connection.once('open', ()=>{
   console.log('connected to mongoose...');
 });

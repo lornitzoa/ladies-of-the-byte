@@ -23,9 +23,11 @@ app.controller("PlanController", [
       this.openIconSearchModal = true;
     };
 
+
     // search icons API
     this.searchIcons = () => {
       // clears search results before repopulating
+
       this.iconSearchResults = [];
       // console.log(this.txtSearchIcons);
       $http({
@@ -50,6 +52,7 @@ app.controller("PlanController", [
       // set image input to selected icon url
       this.image = this.iconURL;
     };
+
 
     this.indexOfFormToShow = null;
     // create event
@@ -76,6 +79,7 @@ app.controller("PlanController", [
           this.date = "";
           this.location = "";
           this.image = "";
+
         },
         err => {
           console.log(err);
@@ -83,7 +87,10 @@ app.controller("PlanController", [
       );
     };
 
+
     this.createTodo = event => {
+    // add todo item to plan todo array
+    
       $http({
         method: "POST",
         url: "/todo",
@@ -198,6 +205,7 @@ app.controller("PlanController", [
 
     // this.getTodos();
 
+
     // create user
     this.createUser = function() {
       $http({
@@ -271,5 +279,6 @@ app.controller("PlanController", [
         // console.log(response);
       });
     };
+
   }
-]); // this closes PlanController
+}]); // this closes PlanController
