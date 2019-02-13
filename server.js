@@ -39,7 +39,7 @@ app.listen(3000, () => {
   console.log('listening...');
 });
 
-mongoose.connect('mongodb://localhost:27017/planner', { useNewUrlParser: true });
+mongoose.connect(mongoURI, { useNewUrlParser: true });
 mongoose.connection.once('open', ()=>{
   console.log('connected to mongoose...');
 });
