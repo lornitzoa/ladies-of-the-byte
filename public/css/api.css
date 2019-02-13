@@ -1,0 +1,39 @@
+.iconModal {
+  display: block;
+  position: fixed;
+
+  /* z-index: 3; */
+  top: 100px;
+  left: 100px;
+  width: 50%;
+  height: 75%;
+  background: rgba(194, 233, 237, 0.78);
+  border-radius: 20px;
+}
+
+#frmIconSearch {
+  padding-top: 20px;
+}
+
+#iconSearchResults {
+  /* display: flex; */
+  width: 95%;
+  height: 80%;
+  margin: 10px auto;
+  background: rgba(220, 241, 211, 0.74);
+  border-radius: 20px;
+  overflow: scroll;
+  overflow-x: hidden;
+
+}
+
+
+.icon {
+  width: 100px;
+  height: 100px;
+}
+
+.icon:hover {
+  background: rgba(90, 161, 83, 0.79);
+  border-radius: 20px;
+}
