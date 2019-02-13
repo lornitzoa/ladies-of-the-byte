@@ -8,7 +8,7 @@ const NounProject = require('the-noun-project')
 require('dotenv').config()
 
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/' + 'heroku';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/' + 'planner';
 
 app.use(session({
 	secret: process.env.SECRET,
