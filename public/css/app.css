@@ -38,9 +38,6 @@ input {
   font-size: 18px;
 }
 
-#planItBtn {
-}
-
 a {
   color: whitesmoke;
   text-decoration: none;
@@ -159,7 +156,6 @@ button {
   color: #ccc;
   float: right;
   font-size: 90px;
-  padding: -10px;
 }
 
 .closeBtn:hover,

@@ -150,20 +150,30 @@
       </div>
     </div>
     <div class="iconModal" ng-show="ctrl.openIconSearchModal">
-      <form id="frmIconSearch" ng-submit="ctrl.searchIcons()">
-        <input type="text" id="txtIconSearch" ng-model="ctrl.txtSearchIcons" />
-        <input type="submit" name="" value="Search" />
-        <button type="button" ng-click="ctrl.openIconSearchModal = false">
-          Cancel
-        </button>
-      </form>
-      <div id="iconSearchResults" ng-class="iconSearchResults">
-        <img
-          ng-repeat="icon in ctrl.icons"
-          src="{{icon.attribution_preview_url}}"
-          class="icon"
-          ng-click="ctrl.sendIconToDB(icon.attribution_preview_url)"
-        />
+      <div class="iconModalContent">
+        <span
+          ng-click="ctrl.openIconSearchModal = false"
+          class="closeBtn"
+          id="iconCloseBtn"
+        >
+          &times;
+        </span>
+        <form id="frmIconSearch" ng-submit="ctrl.searchIcons()">
+          <input
+            type="text"
+            id="txtIconSearch"
+            ng-model="ctrl.txtSearchIcons"
+          />
+          <input type="submit" class="button" name="" value="Search" />
+        </form>
+        <div id="iconSearchResults" ng-class="iconSearchResults">
+          <img
+            ng-repeat="icon in ctrl.icons"
+            src="{{icon.attribution_preview_url}}"
+            class="icon"
+            ng-click="ctrl.sendIconToDB(icon.attribution_preview_url)"
+          />
+        </div>
       </div>
     </div>
     <footer><h4>&#8594; Ladies of the Byte &#8592;</h4></footer>
