@@ -16,41 +16,40 @@ app.controller("PlanController", [
     this.showLogInUser = false;
 
     // variable to hold icon url
-    this.iconURL = ''
-
+    this.iconURL = "";
 
     // allows for show/hide of icon search iconModal
-    this.showIconSearch = (image) => {
-      this.openIconSearchModal = true
-    }
+    this.showIconSearch = image => {
+      this.openIconSearchModal = true;
+    };
 
     // search icons API
     this.searchIcons = () => {
       // clears search results before repopulating
-      this.iconSearchResults = []
+      this.iconSearchResults = [];
       // console.log(this.txtSearchIcons);
       $http({
-        method: 'GET',
+        method: "GET",
         url: `/iconapi/${this.txtSearchIcons}`
       }).then(
-        (res) => {
+        res => {
           // set variable for icons array for view to show
-          this.icons = res.data.icons
+          this.icons = res.data.icons;
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-      )
-    }
+      );
+    };
 
-    this.sendIconToDB = (icon) => {
+    this.sendIconToDB = icon => {
       // set global iconURL variable to clicked icon url
-      this.iconURL = icon
+      this.iconURL = icon;
       // close icon search modal
-      this.openIconSearchModal = false
+      this.openIconSearchModal = false;
       // set image input to selected icon url
-      this.image = this.iconURL
-    }
+      this.image = this.iconURL;
+    };
 
     this.indexOfFormToShow = null;
     // create event
@@ -63,29 +62,26 @@ app.controller("PlanController", [
           title: this.title,
           date: this.date,
           location: this.location,
-          image: this.image
-          modal: this.modal,
-
+          image: this.image,
+          modal: this.modal
         }
       }).then(
-        (res) => {
+        res => {
           // set global planID variable for adding todos
-          this.planID = res.data._id
+          this.planID = res.data._id;
           // push event into array to display
           this.events.push(res.data);
           // clear input boxes
-          this.title = ''
-          this.date = ''
-          this.location = ''
-          this.image = ''
-         
+          this.title = "";
+          this.date = "";
+          this.location = "";
+          this.image = "";
         },
         err => {
           console.log(err);
         }
       );
     };
-
 
     this.createTodo = event => {
       $http({
@@ -172,73 +168,78 @@ app.controller("PlanController", [
 
     // this.getTodos();
 
-  // create user
-  this.createUser = function() {
-    $http({
-      method: 'POST',
-      url: '/users',
-      data: {
-        username: this.username,
-        password: this.password
-      }
-    }).then(
-      response => {
-        this.username = "";
-        this.password = "";
-      // console.log(response);
-    }, function() {
-      console.log('error');
-    });
-  }
+    // create user
+    this.createUser = function() {
+      $http({
+        method: "POST",
+        url: "/users",
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      }).then(
+        response => {
+          this.username = "";
+          this.password = "";
+          // console.log(response);
+        },
+        function() {
+          console.log("error");
+        }
+      );
+    };
 
-  // user log in
-  this.logIn = function() {
-    $http({
-      method: 'POST',
-      url: '/sessions',
-      data: {
-        username: this.usernameLogIn,
-        password: this.passwordLogIn
-      }
-    }).then(
-      response => {
-        controller.goApp();
-        this.usernameLogIn = "";
-        this.passwordLogIn = "";
-      },
-      err => {
-        console.log(err);
-      }
-    // .then(function(response) {
-    //   // console.log(response);
-    //   controller.goApp();
-    // }, function() {
-    //   console.log('error');
-    );
-  }
+    // user log in
+    this.logIn = function() {
+      $http({
+        method: "POST",
+        url: "/sessions",
+        data: {
+          username: this.usernameLogIn,
+          password: this.passwordLogIn
+        }
+      }).then(
+        response => {
+          controller.goApp();
+          this.usernameLogIn = "";
+          this.passwordLogIn = "";
+        },
+        err => {
+          console.log(err);
+        }
+        // .then(function(response) {
+        //   // console.log(response);
+        //   controller.goApp();
+        // }, function() {
+        //   console.log('error');
+      );
+    };
 
-// access for users
-  this.goApp = function() {
-    $http({
-      method: 'GET',
-      url: '/users'
-    }).then(function (response) {
-      controller.loggedInUsername = response.data.username;
-      // console.log(response.data);
-    }, function (err) {
-      console.log(err);
-    });
+    // access for users
+    this.goApp = function() {
+      $http({
+        method: "GET",
+        url: "/users"
+      }).then(
+        function(response) {
+          controller.loggedInUsername = response.data.username;
+          // console.log(response.data);
+        },
+        function(err) {
+          console.log(err);
+        }
+      );
+    };
+    this.goApp();
+    // log out
+    this.logOut = function() {
+      $http({
+        method: "DELETE",
+        url: "/sessions"
+      }).then(function(response) {
+        controller.loggedInUsername = undefined;
+        // console.log(response);
+      });
+    };
   }
-  this.goApp()
-// log out
-  this.logOut = function () {
-    $http({
-      method: 'DELETE',
-      url: '/sessions'
-    }).then(function (response)  {
-      controller.loggedInUsername = undefined;
-      // console.log(response);
-    })
-  }
-}]); // this closes PlanController
-
+]); // this closes PlanController
